@@ -11,3 +11,12 @@
     @apply font-sans antialiased bg-background text-foreground;
   }
 }
+
+@font-face {
+  font-family: 'Western';
+  src: url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
+}
+
+.font-western {
+  font-family: 'Rye', 'Western', serif;
+}
