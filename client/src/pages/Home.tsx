@@ -8,9 +8,9 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F4D03F] to-[#D35400]">
+    <div className="min-h-screen bg-white">
       <Navbar onJoinClick={() => setShowModal(true)} />
-      
+
       <motion.main 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -18,16 +18,16 @@ export default function Home() {
       >
         <div className="max-w-4xl mx-auto space-y-12">
           <section className="text-center space-y-6">
-            <h1 className="text-6xl font-bold text-white font-western">
+            <h1 className="text-6xl font-bold text-neutral-900 font-western">
               Steel River Saints
             </h1>
-            <p className="text-xl text-white/90">
+            <p className="text-xl text-neutral-600">
               Join our community of country music lovers and get exclusive access to behind-the-scenes content
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-black/80 text-white rounded-lg font-bold hover:bg-black/90 transition-colors"
+              className="px-8 py-3 bg-amber-700 text-white rounded-lg font-bold hover:bg-amber-800 transition-colors"
               onClick={() => setShowModal(true)}
             >
               Become a Member

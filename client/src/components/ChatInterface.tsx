@@ -7,10 +7,10 @@ import { sampleMessages } from "@/lib/sample-data";
 
 export default function ChatInterface() {
   return (
-    <Card className="p-4 bg-gradient-to-br from-[#2C1810]/90 to-[#1A0F0A]/90 backdrop-blur-sm rounded-lg shadow-xl border border-[#F4D03F]/20">
-      <h2 className="text-2xl font-bold mb-4 font-western text-[#F4D03F]">Fan Chat</h2>
+    <Card className="p-6 bg-white rounded-lg shadow-lg border border-neutral-100">
+      <h2 className="text-2xl font-bold mb-6 font-western text-neutral-900">Fan Chat</h2>
 
-      <ScrollArea className="h-[400px] mb-4 pr-4">
+      <ScrollArea className="h-[400px] mb-6 pr-4">
         <div className="space-y-4">
           {sampleMessages.map((message, i) => (
             <motion.div
@@ -21,13 +21,13 @@ export default function ChatInterface() {
               className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
             >
               <div
-                className={`max-w-[80%] p-3 rounded-lg ${
+                className={`max-w-[80%] p-4 rounded-lg ${
                   message.isUser
-                    ? 'bg-[#F4D03F] text-black ml-auto'
-                    : 'bg-[#2C1810] text-[#F4D03F] border border-[#F4D03F]/20'
+                    ? 'bg-amber-700 text-white ml-auto'
+                    : 'bg-neutral-50 text-neutral-800 border border-neutral-200'
                 }`}
               >
-                <p className="text-sm font-medium mb-1">
+                <p className="text-sm font-medium mb-1 opacity-80">
                   {message.isUser ? 'You' : 'Steel River Saints'}
                 </p>
                 <p>{message.text}</p>
@@ -37,12 +37,12 @@ export default function ChatInterface() {
         </div>
       </ScrollArea>
 
-      <div className="flex space-x-2">
+      <div className="flex space-x-3">
         <Input
           placeholder="Type your message..."
-          className="flex-1 bg-[#2C1810] border-[#F4D03F]/20 text-[#F4D03F] placeholder-[#F4D03F]/50"
+          className="flex-1 border-neutral-200 placeholder-neutral-400 focus:border-amber-700"
         />
-        <Button className="bg-[#F4D03F] hover:bg-[#D35400] text-black font-bold transition-colors duration-300">
+        <Button className="bg-amber-700 hover:bg-amber-800 text-white font-bold transition-colors duration-300">
           Send
         </Button>
       </div>
