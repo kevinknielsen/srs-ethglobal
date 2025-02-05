@@ -17,34 +17,34 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/20"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/10"
           >
-            <Card className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg border border-neutral-100">
-              <h2 className="text-3xl font-bold mb-6 font-western text-center text-neutral-900">
+            <Card className="w-full max-w-md p-8 bg-white rounded-lg shadow-sm border border-stone-100">
+              <h2 className="text-3xl font-bold mb-6 font-western text-center text-stone-800">
                 Premium Membership
               </h2>
 
               <div className="space-y-6 mb-8">
                 <div className="flex items-center space-x-2 justify-center">
-                  <span className="text-3xl font-bold text-neutral-900">$19.99</span>
-                  <span className="text-neutral-500">/month</span>
+                  <span className="text-3xl font-bold text-stone-800">$19.99</span>
+                  <span className="text-stone-500">/month</span>
                 </div>
 
                 <ul className="space-y-4">
-                  <li className="flex items-center text-neutral-700">
-                    <span className="mr-3 text-amber-700">✓</span>
+                  <li className="flex items-center text-stone-700">
+                    <span className="mr-3 text-stone-600">✓</span>
                     Exclusive behind-the-scenes content
                   </li>
-                  <li className="flex items-center text-neutral-700">
-                    <span className="mr-3 text-amber-700">✓</span>
+                  <li className="flex items-center text-stone-700">
+                    <span className="mr-3 text-stone-600">✓</span>
                     Early access to new releases
                   </li>
-                  <li className="flex items-center text-neutral-700">
-                    <span className="mr-3 text-amber-700">✓</span>
+                  <li className="flex items-center text-stone-700">
+                    <span className="mr-3 text-stone-600">✓</span>
                     Members-only chat access
                   </li>
-                  <li className="flex items-center text-neutral-700">
-                    <span className="mr-3 text-amber-700">✓</span>
+                  <li className="flex items-center text-stone-700">
+                    <span className="mr-3 text-stone-600">✓</span>
                     Virtual meet & greets
                   </li>
                 </ul>
@@ -52,7 +52,7 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
 
               <div className="space-y-3">
                 <Button 
-                  className="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold transition-colors duration-300"
+                  className="w-full bg-stone-700 hover:bg-stone-800 text-white font-medium transition-colors duration-300"
                   onClick={() => {
                     onClose();
                   }}
@@ -61,7 +61,7 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
                 </Button>
                 <Button 
                   variant="outline"
-                  className="w-full border-neutral-200 text-neutral-700 hover:bg-neutral-50"
+                  className="w-full border-stone-200 text-stone-700 hover:bg-stone-50"
                   onClick={onClose}
                 >
                   Maybe Later

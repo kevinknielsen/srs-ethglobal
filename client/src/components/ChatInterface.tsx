@@ -7,8 +7,8 @@ import { sampleMessages } from "@/lib/sample-data";
 
 export default function ChatInterface() {
   return (
-    <Card className="p-6 bg-white rounded-lg shadow-lg border border-neutral-100">
-      <h2 className="text-2xl font-bold mb-6 font-western text-neutral-900">Fan Chat</h2>
+    <Card className="p-6 bg-white rounded-lg shadow-sm border border-stone-100">
+      <h2 className="text-2xl font-bold mb-6 font-western text-stone-800">Fan Chat</h2>
 
       <ScrollArea className="h-[400px] mb-6 pr-4">
         <div className="space-y-4">
@@ -23,8 +23,8 @@ export default function ChatInterface() {
               <div
                 className={`max-w-[80%] p-4 rounded-lg ${
                   message.isUser
-                    ? 'bg-amber-700 text-white ml-auto'
-                    : 'bg-neutral-50 text-neutral-800 border border-neutral-200'
+                    ? 'bg-stone-700 text-white ml-auto'
+                    : 'bg-stone-50 text-stone-800 border border-stone-200'
                 }`}
               >
                 <p className="text-sm font-medium mb-1 opacity-80">
@@ -40,9 +40,9 @@ export default function ChatInterface() {
       <div className="flex space-x-3">
         <Input
           placeholder="Type your message..."
-          className="flex-1 border-neutral-200 placeholder-neutral-400 focus:border-amber-700"
+          className="flex-1 border-stone-200 placeholder-stone-400 focus:border-stone-400"
         />
-        <Button className="bg-amber-700 hover:bg-amber-800 text-white font-bold transition-colors duration-300">
+        <Button className="bg-stone-700 hover:bg-stone-800 text-white font-medium transition-colors duration-300">
           Send
         </Button>
       </div>
