@@ -3,11 +3,9 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import MembershipModal from "@/components/MembershipModal";
 import ChatInterface from "@/components/ChatInterface";
-import { Input } from "@/components/ui/input";
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
-  const [email, setEmail] = useState("");
 
   return (
     <div className="min-h-screen bg-black">
@@ -65,21 +63,14 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="max-w-sm mx-auto space-y-4">
-              <Input
-                type="email"
-                placeholder="Your email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-[#0D1021] border-white/10 text-white placeholder-white/40 h-12 rounded-xl focus:border-blue-500/50"
-              />
+            <div className="max-w-sm mx-auto">
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="w-full h-12 bg-gradient-to-r from-[#2563EB] to-[#3B82F6] text-white rounded-xl font-medium transition-all duration-300 hover:from-[#1D4ED8] hover:to-[#2563EB] shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]"
                 onClick={() => setShowModal(true)}
               >
-                Join waitlist
+                Purchase Membership
               </motion.button>
             </div>
           </section>
