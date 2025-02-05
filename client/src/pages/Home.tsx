@@ -23,7 +23,7 @@ export default function Home() {
           <div 
             className="absolute inset-0 bg-cover bg-center opacity-30"
             style={{ 
-              backgroundImage: 'url("/7f31736f-9d89-4ba8-8c04-7e13327f1882.png")',
+              backgroundImage: 'url("/images/artist-banner.png")',
               backgroundPosition: '50% 30%',
             }}
           />
