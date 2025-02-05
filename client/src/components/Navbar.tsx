@@ -14,15 +14,12 @@ export default function Navbar({ onJoinClick }: NavbarProps) {
           </div>
 
           <div className="flex items-center space-x-6">
-            <a href="#" className="text-white/60 hover:text-white text-sm transition-colors">Early Benefits</a>
-            <a href="#" className="text-white/60 hover:text-white text-sm transition-colors">Reviews</a>
-            <a href="#" className="text-white/60 hover:text-white text-sm transition-colors">FAQ's</a>
             <Button
               variant="ghost"
               className="text-white/80 hover:text-white hover:bg-white/5"
               onClick={onJoinClick}
             >
-              Get Template
+              Login
             </Button>
           </div>
         </div>
