@@ -16,9 +16,21 @@ export default function Home() {
       <motion.main 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="container mx-auto px-4 py-24"
+        className="relative container mx-auto px-4 py-24"
       >
-        <div className="max-w-4xl mx-auto space-y-24">
+        {/* Background image with overlay */}
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-30"
+            style={{ 
+              backgroundImage: 'url("/7f31736f-9d89-4ba8-8c04-7e13327f1882.png")',
+              backgroundPosition: '50% 30%',
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto space-y-24">
           <section className="text-center space-y-8">
             <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#1D254A] border border-blue-500/20">
               <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
