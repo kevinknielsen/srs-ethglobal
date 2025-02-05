@@ -57,7 +57,7 @@ export default function MembershipModal({ isOpen, onClose }: MembershipModalProp
                     onClose();
                   }}
                 >
-                  Join Now
+                  Purchase Membership
                 </Button>
                 <Button 
                   variant="outline"
