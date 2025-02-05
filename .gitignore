@@ -69,3 +69,6 @@ logs
 *.tmp
 *.temp
 .DS_Store
+
+# Client environment variables
+client/.env
