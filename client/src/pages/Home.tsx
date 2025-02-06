@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { PurchaseButton } from "@/components/PurchaseButton";
 import ChatInterface from "@/components/ChatInterface";
+import Timer from "@/components/Timer";
 
 export default function Home() {
   return (
@@ -30,7 +31,7 @@ export default function Home() {
           <section className="text-center space-y-8">
             <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#1D254A] border border-blue-500/20">
               <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
-              <span className="text-sm font-medium text-blue-400">LAUNCHES: MAY 5, 2025</span>
+              <span className="text-sm font-medium text-blue-400">LAUNCHES: March 20, 2025</span>
             </div>
 
             <div className="space-y-6">
@@ -42,24 +43,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-4 gap-4 max-w-sm mx-auto">
-              <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">89</div>
-                <div className="text-xs text-white/40 uppercase">Days</div>
-              </div>
-              <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">03</div>
-                <div className="text-xs text-white/40 uppercase">Hours</div>
-              </div>
-              <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">51</div>
-                <div className="text-xs text-white/40 uppercase">Minutes</div>
-              </div>
-              <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">31</div>
-                <div className="text-xs text-white/40 uppercase">Seconds</div>
-              </div>
-            </div>
+            <Timer />
           </section>
 
           <div className="max-w-sm mx-auto">
