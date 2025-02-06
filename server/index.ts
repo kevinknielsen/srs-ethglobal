@@ -62,20 +62,19 @@ app.use((req, res, next) => {
   const PORT = process.env.PORT || 5001;
 
   // Try different ports if the default is in use
-  const startServer = async () => {
-    try {
-      server.listen(Number(PORT), () => {
-        log(`Server running on port ${PORT}`);
-      });
-    } catch (err: any) {
-      if (err?.code === 'EADDRINUSE') {
-        const nextPort = Number(PORT) + 1;
-        log(`Port ${PORT} is busy, trying ${nextPort}`);
-        server.listen(nextPort);
+  const startServer = async (retryPort = Number(PORT)) => {
+    server.once('error', (err: any) => {
+      if (err.code === 'EADDRINUSE') {
+        log(`Port ${retryPort} is busy, trying ${retryPort + 1}`);
+        startServer(retryPort + 1);
       } else {
         log('Server error:', err?.message || 'Unknown error');
       }
-    }
+    });
+
+    server.listen(retryPort, '0.0.0.0', () => {
+      log(`Server running on port ${retryPort}`);
+    });
   };
 
   startServer();
