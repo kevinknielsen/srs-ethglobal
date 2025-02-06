@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
-import MembershipModal from "@/components/MembershipModal";
+import { PurchaseButton } from "@/components/PurchaseButton";
 import ChatInterface from "@/components/ChatInterface";
 
 export default function Home() {
-  const [showModal, setShowModal] = useState(false);
-
   return (
     <div className="min-h-screen bg-black">
-      <Navbar onJoinClick={() => setShowModal(true)} />
+      <Navbar />
 
       <motion.main 
         initial={{ opacity: 0, y: 20 }}
@@ -62,27 +60,15 @@ export default function Home() {
                 <div className="text-xs text-white/40 uppercase">Seconds</div>
               </div>
             </div>
-
-            <div className="max-w-sm mx-auto">
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full h-12 bg-gradient-to-r from-[#2563EB] to-[#3B82F6] text-white rounded-xl font-medium transition-all duration-300 hover:from-[#1D4ED8] hover:to-[#2563EB] shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]"
-                onClick={() => setShowModal(true)}
-              >
-                Purchase Membership
-              </motion.button>
-            </div>
           </section>
+
+          <div className="max-w-sm mx-auto">
+            <PurchaseButton />
+          </div>
 
           <ChatInterface />
         </div>
       </motion.main>
-
-      <MembershipModal 
-        isOpen={showModal} 
-        onClose={() => setShowModal(false)} 
-      />
     </div>
   );
 }
