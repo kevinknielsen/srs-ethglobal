@@ -1,8 +1,9 @@
 import { usePrivy } from '@privy-io/react-auth';
 import { useLocation } from 'wouter';
+import { Button } from "@/components/ui/button";
 
 export function LoginButton() {
-  const { login, authenticated } = usePrivy();
+  const { login, authenticated, user } = usePrivy();
   const [, setLocation] = useLocation();
 
   const handleLogin = async () => {
@@ -11,15 +12,19 @@ export function LoginButton() {
   };
 
   if (authenticated) {
-    return null; // Or show a different button/component when logged in
+    return (
+      <Button variant="outline">
+        {user?.email || 'Account'}
+      </Button>
+    );
   }
 
   return (
-    <button
+    <Button
       onClick={handleLogin}
-      className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+      variant="outline"
     >
       Login
-    </button>
+    </Button>
   );
 } 
