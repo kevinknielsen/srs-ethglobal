@@ -25,7 +25,7 @@ function App() {
 
   return (
     <PrivyProvider
-      appId={import.meta.env.VITE_PRIVY_APP_ID}
+      appId={"cm6rbnitw01gz1k0i8vnq9nff"}
       config={{
         appearance: {
           accentColor: "#6A6FF5",
