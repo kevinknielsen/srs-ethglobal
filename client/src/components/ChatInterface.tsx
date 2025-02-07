@@ -35,7 +35,7 @@ export default function ChatInterface() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://autonome.alt.technology/superfan-xtblqo/chat', {
+      const response = await fetch('https://autonome.alt.technology/chat', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
