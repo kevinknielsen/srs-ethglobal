@@ -35,11 +35,11 @@ export default function ChatInterface() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://autonome.alt.technology/superfan-xtblqo/chat', {
+      const response = await fetch(import.meta.env.VITE_CHATBOT_API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Basic c3VwZXJmYW46aVRBeWZTdnpFZA=="
+          "Authorization": `Basic ${btoa(`${import.meta.env.VITE_CHATBOT_USERNAME}:${import.meta.env.VITE_CHATBOT_PASSWORD}`)}`
         },
         body: JSON.stringify({ message: inputText })
       });
