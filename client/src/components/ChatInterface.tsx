@@ -40,21 +40,23 @@ export default function ChatInterface() {
     setError(null);
 
     try {
-      const response = await fetch('https://autonome.alt.technology/eliza-rwvkai/b850bc30-45f8-0041-a00a-83df46d8555d/message', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Basic ZWxpemE6clNrdnBmbnRTeQ==',
-          'Accept': 'application/json'
-        },
-        mode: 'cors',
-        credentials: 'omit',
-        body: JSON.stringify({ message: inputText }),
-      });
+        const response = await fetch('https://autonome.alt.technology/eliza-rwvkai/b850bc30-45f8-0041-a00a-83df46d8555d/message', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic ZWxpemE6clNrdnBmbnRTeQ==',
+            'Accept': 'application/json'
+          },
+          mode: 'cors',
+          credentials: 'omit',
+          body: JSON.stringify({ message: inputText }),
+          cache: 'no-cache',
+        });
 
-      if (!response.ok) {
-        throw new Error('Failed to send message');
-      }
+        if (!response.ok) {
+          const errorData = await response.text();
+          throw new Error(errorData || 'Failed to send message');
+        }
 
       const data = await response.json();
       setMessages((prev) => [...prev, { text: data.response, isUser: false }]);
