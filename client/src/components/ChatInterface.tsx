@@ -35,7 +35,7 @@ export default function ChatInterface() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(
+  const response = await fetch(      const response = await fetch(
         "https://autonome.alt.technology/eliza-rwvkai/chat",
         {
           method: "POST",
