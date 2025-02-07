@@ -57,9 +57,25 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  const PORT = process.env.PORT || 3000;
-  
-  server.listen(PORT, '0.0.0.0', () => {
-    log(`Server running on port ${PORT}`);
-  });
+  // ALWAYS serve the app on port 5000
+  // this serves both the API and the client
+  const PORT = process.env.PORT || 5001;
+
+  // Try different ports if the default is in use
+  const startServer = async (retryPort = Number(PORT)) => {
+    server.once('error', (err: any) => {
+      if (err.code === 'EADDRINUSE') {
+        log(`Port ${retryPort} is busy, trying ${retryPort + 1}`);
+        startServer(retryPort + 1);
+      } else {
+        log('Server error:', err?.message || 'Unknown error');
+      }
+    });
+
+    server.listen(retryPort, '0.0.0.0', () => {
+      log(`Server running on port ${retryPort}`);
+    });
+  };
+
+  startServer();
 })();
