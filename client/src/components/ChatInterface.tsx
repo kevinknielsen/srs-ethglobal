@@ -42,9 +42,7 @@ export default function ChatInterface() {
           headers: {
             "Content-Type": "application/json",
             "Authorization": "Basic ZWxpemE6clNrdnBmbnRTeQ==",
-            "Accept": "application/json"
           },
-          mode: "no-cors",
           body: JSON.stringify({ message: inputText }),
         },
       );
@@ -52,8 +50,15 @@ export default function ChatInterface() {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
-      const data = await response.json();
+      
+      let data;
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        data = { response: text };
+      }
 
       setMessages((prev) => [...prev, { text: data.response, isUser: false }]);
     } catch (error) {
