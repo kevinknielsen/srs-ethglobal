@@ -1,0 +1,11 @@
+Error sending message: 
+TypeError {}
+message: "Failed to fetch"
+stack: "TypeError: Failed to fetch↵ at window.fetch (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/__replco/static/devtools/eruda/3.2.3/eruda.js:2:218642)↵ at sendMessage (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/src/components/ChatInterface.tsx:45:30)↵ at onKeyPress (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/src/components/ChatInterface.tsx:150:51)↵ at HTMLUnknownElement.callCallback2 (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LQCVLUPF.js?v=358c1179:3674:22)↵ at Object.invokeGuardedCallbackDev (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LQCVLUPF.js?v=358c1179:3699:24)↵ at invokeGuardedCallback (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LQCVLUPF.js?v=358c1179:3733:39)↵ at invokeGuardedCallbackAndCatchFirstError (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LQCVLUPF.js?v=358c1179:3736:33)↵ at executeDispatch (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LQCVLUPF.js?v=358c1179:7014:11)↵ at processDispatchQueueItemsInOrder (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LQCVLUPF.js?v=358c1179:7034:15)↵ at processDispatchQueue (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LQCVLUPF.js?v=358c1179:7043:13)"
+get stack: ƒ ()
+set stack: ƒ ()
+[[Prototype]]: Object
+
+Failed to fetch
+at window.fetch (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/__replco/static/devtools/eruda/3.2.3/eruda.js:2:218642)
+at sendMessage (https://889468a5-1
