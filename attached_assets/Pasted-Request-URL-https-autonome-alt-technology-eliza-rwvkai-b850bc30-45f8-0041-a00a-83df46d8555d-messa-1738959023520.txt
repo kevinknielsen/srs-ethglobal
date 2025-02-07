@@ -1,0 +1,84 @@
+Request URL:
+https://autonome.alt.technology/eliza-rwvkai/b850bc30-45f8-0041-a00a-83df46d8555d/message
+Request Method:
+POST
+Status Code:
+200 OK
+Remote Address:
+104.26.15.164:443
+Referrer Policy:
+strict-origin-when-cross-origin
+access-control-allow-credentials:
+true
+access-control-allow-headers:
+DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization
+access-control-allow-methods:
+GET, PUT, POST, DELETE, PATCH, OPTIONS
+access-control-allow-origin:
+*
+access-control-max-age:
+1728000
+cf-cache-status:
+DYNAMIC
+cf-ray:
+90e604ee290b43b7-EWR
+content-encoding:
+br
+content-type:
+application/json; charset=utf-8
+date:
+Fri, 07 Feb 2025 20:09:47 GMT
+etag:
+W/"6c-ZZGnWAZJNlqz7MM3tfiqS+8zqX4"
+nel:
+{"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+report-to:
+{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=1nyYT2FJLN4kGnIcG4dh%2BW7QYAEiGBlZNXBhQ1y5VHi0b0U5BbGwYLXYH5VUTRWz4aBHhPnQJnN1XkGAlCr3G%2F4vrc%2F89K41yYXNDT5e1FMStaNqm3NgAFrNS09dc7PCskvVsqNkxdqb"}],"group":"cf-nel","max_age":604800}
+server:
+cloudflare
+server-timing:
+cfL4;desc="?proto=TCP&rtt=25651&min_rtt=14509&rtt_var=12905&sent=18&recv=20&lost=0&retrans=0&sent_bytes=3541&recv_bytes=3353&delivery_rate=236995&cwnd=256&unsent_bytes=0&cid=83e9f2d9b1fe8761&ts=32753&x=0"
+strict-transport-security:
+max-age=15724800; includeSubDomains
+x-powered-by:
+Express
+:authority:
+autonome.alt.technology
+:method:
+POST
+:path:
+/eliza-rwvkai/b850bc30-45f8-0041-a00a-83df46d8555d/message
+:scheme:
+https
+accept:
+application/json, text/plain, */*
+accept-encoding:
+gzip, deflate, br, zstd
+accept-language:
+en-US,en;q=0.9
+authorization:
+Basic ZWxpemE6clNrdnBmbnRTeQ==
+content-length:
+31
+content-type:
+application/json
+origin:
+https://dev.autonome.fun
+priority:
+u=1, i
+referer:
+https://dev.autonome.fun/
+sec-ch-ua:
+"Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132"
+sec-ch-ua-mobile:
+?1
+sec-ch-ua-platform:
+"Android"
+sec-fetch-dest:
+empty
+sec-fetch-mode:
+cors
+sec-fetch-site:
+cross-site
+user-agent:
+Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36
