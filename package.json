@@ -13,6 +13,7 @@
   "dependencies": {
     "@coinbase/cbpay-js": "^2.4.0",
     "@coinbase/coinbase-sdk": "^0.17.0",
+    "@coinbase/onchainkit": "^0.36.10",
     "@hookform/resolvers": "^3.9.1",
     "@jridgewell/trace-mapping": "^0.3.25",
     "@neondatabase/serverless": "^0.10.4",
@@ -58,6 +59,7 @@
     "express": "^4.21.2",
     "express-session": "^1.18.1",
     "framer-motion": "^11.13.1",
+    "idb": "^8.0.2",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.453.0",
     "memorystore": "^1.6.7",
@@ -73,6 +75,7 @@
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.0",
+    "viem": "^2.22.23",
     "wouter": "^3.3.5",
     "ws": "^8.18.0",
     "zod": "^3.23.8",

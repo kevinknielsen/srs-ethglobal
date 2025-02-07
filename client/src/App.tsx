@@ -4,6 +4,8 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import Home from "@/pages/Home";
 import { Route, Switch } from "wouter";
+import { OnchainProvider } from './providers/OnchainKitProvider';
+import '@coinbase/onchainkit/styles.css';
 import "./index.css";
 
 function App() {
@@ -19,14 +21,16 @@ function App() {
         },
       }}
     >
-      <QueryClientProvider client={queryClient}>
-        <div className="min-h-screen bg-black text-white">
-          <Switch>
-            <Route path="/" component={Home} />
-          </Switch>
-          <Toaster />
-        </div>
-      </QueryClientProvider>
+      <OnchainProvider>
+        <QueryClientProvider client={queryClient}>
+          <div className="min-h-screen bg-black text-white">
+            <Switch>
+              <Route path="/" component={Home} />
+            </Switch>
+            <Toaster />
+          </div>
+        </QueryClientProvider>
+      </OnchainProvider>
     </PrivyProvider>
   );
 }

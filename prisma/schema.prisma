@@ -1,0 +1,11 @@
+model Subscription {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  transactionHash String
+  createdAt       DateTime @default(now())
+  expiresAt       DateTime
+  isActive        Boolean  @default(true)
+
+  @@index([userId])
+  @@index([transactionHash])
+} 
