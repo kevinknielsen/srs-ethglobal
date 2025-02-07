@@ -40,13 +40,20 @@ export default function ChatInterface() {
     setError(null);
 
     try {
-      // For now, simulate a response while the backend is being set up
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      const simulatedResponse = {
-        response: "Thanks for your message! Our chat system is currently being upgraded. In the meantime, feel free to explore our premium membership features!"
-      };
-
-      setMessages((prev) => [...prev, { text: simulatedResponse.response, isUser: false }]);
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: inputText }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+      
+      const data = await response.json();
+      setMessages((prev) => [...prev, { text: data.response, isUser: false }]);
     } catch (err) {
       console.error("Error sending message:", err);
       const errorMessage = err instanceof Error ? err.message : "Failed to send message. Please try again.";
