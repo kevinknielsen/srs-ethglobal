@@ -35,17 +35,14 @@ export default function ChatInterface() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(
-        "https://autonome.alt.technology/eliza-rwvkai/chat",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Basic c3VwZXJmYW46aVRBeWZTdnpFZA==",
-          },
-          body: JSON.stringify({ message: inputText }),
+      const response = await fetch(`${import.meta.env.VITE_CHATBOT_API_URL}/chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Basic ${btoa(`${import.meta.env.VITE_CHATBOT_USERNAME}:${import.meta.env.VITE_CHATBOT_PASSWORD}`)}`
         },
-      );
+        body: JSON.stringify({ message: inputText }),
+      });
 
       const data = await response.json();
 
