@@ -46,17 +46,17 @@ export default function ChatInterface() {
           'Content-Type': 'application/json',
           'Authorization': 'Basic ZWxpemE6clNrdnBmbnRTeQ==',
           'Accept': 'application/json',
-          'Origin': 'https://autonome.alt.technology'
+          'Origin': window.location.origin
         },
+        referrerPolicy: 'strict-origin-when-cross-origin',
         credentials: 'include',
-        mode: 'cors',
         body: JSON.stringify({ message: inputText }),
       });
-      
+
       if (!response.ok) {
         throw new Error('Failed to send message');
       }
-      
+
       const data = await response.json();
       setMessages((prev) => [...prev, { text: data.response, isUser: false }]);
     } catch (err) {
