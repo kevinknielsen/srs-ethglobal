@@ -41,13 +41,9 @@ export default function ChatInterface() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": "Basic ZWxpemE6clNrdnBmbnRTeQ==",
-            "Accept": "application/json",
-            "Origin": window.location.origin
+            "Authorization": "Basic ZWxpemE6clNrdnBmbnRTeQ=="
           },
-          credentials: "include",
-          mode: "cors",
-          body: JSON.stringify({ message: inputText }),
+          body: JSON.stringify({ message: inputText })
         },
       );
 
