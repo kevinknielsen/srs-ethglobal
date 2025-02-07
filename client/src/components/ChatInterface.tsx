@@ -46,10 +46,9 @@ export default function ChatInterface() {
           'Content-Type': 'application/json',
           'Authorization': 'Basic ZWxpemE6clNrdnBmbnRTeQ==',
           'Accept': 'application/json',
-          'Origin': window.location.origin
         },
-        referrerPolicy: 'strict-origin-when-cross-origin',
-        credentials: 'include',
+        mode: 'cors',
+        credentials: 'same-origin',
         body: JSON.stringify({ message: inputText }),
       });
 
