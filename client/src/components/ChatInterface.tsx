@@ -35,13 +35,13 @@ export default function ChatInterface() {
     setIsLoading(true);
 
     try {
-  const response = await fetch(      const response = await fetch(
+      const response = await fetch(
         "https://autonome.alt.technology/eliza-rwvkai/chat",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Basic ZWxpemE6clNrdnBmbnRTeQ==", // eliza:rSkvpfntSy
+            "Authorization": "Basic " + btoa("eliza:rSkvpfntSy")
           },
           body: JSON.stringify({ message: inputText }),
         },
