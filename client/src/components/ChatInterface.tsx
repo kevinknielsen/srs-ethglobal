@@ -39,7 +39,7 @@ export default function ChatInterface() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Basic ZWxpemE6cnd2a2Fp"  // eliza:rwvkai
+          "Authorization": "Basic ZWxpemE6clNrdnBmbnRTeQ=="  // eliza:rSkvpfntSy
         },
         body: JSON.stringify({ message: inputText }),
       });
