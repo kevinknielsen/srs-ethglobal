@@ -35,11 +35,11 @@ export default function ChatInterface() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(import.meta.env.VITE_CHATBOT_API_URL, {
+      const response = await fetch('https://autonome.alt.technology/eliza-rwvkai/chat', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Basic ${btoa(`${import.meta.env.VITE_CHATBOT_USERNAME}:${import.meta.env.VITE_CHATBOT_PASSWORD}`)}`
+          "Authorization": "Basic ZWxpemE6cnd2a2Fp"
         },
         body: JSON.stringify({ message: inputText }),
       });
