@@ -42,7 +42,11 @@ export default function ChatInterface() {
           headers: {
             "Content-Type": "application/json",
             "Authorization": "Basic ZWxpemE6clNrdnBmbnRTeQ==",
+            "Accept": "application/json",
+            "Origin": window.location.origin
           },
+          credentials: "include",
+          mode: "cors",
           body: JSON.stringify({ message: inputText }),
         },
       );
