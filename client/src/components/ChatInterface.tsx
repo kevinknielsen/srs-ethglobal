@@ -42,15 +42,18 @@ export default function ChatInterface() {
           headers: {
             "Content-Type": "application/json",
             "Authorization": "Basic ZWxpemE6clNrdnBmbnRTeQ==",
-            "Accept": "application/json"
+            "Accept": "*/*"
           },
-          mode: "no-cors",
+          mode: "cors",
+          credentials: "omit",
           body: JSON.stringify({ message: inputText }),
+          cache: "no-cache"
         },
       );
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (!response.ok || response.status === 0) {
+        console.error('Response status:', response.status);
+        throw new Error('Failed to connect to chat service. Please try again.');
       }
 
       const data = await response.json();
@@ -61,7 +64,7 @@ export default function ChatInterface() {
         ...prev,
         { text: "Sorry, I couldn't process your request.  Please try again later.", isUser: false },
       ]);
-      console.error("Error sending message:", error); //Added for debugging
+      console.error("Error sending message:", error);
     } finally {
       setIsLoading(false);
     }
