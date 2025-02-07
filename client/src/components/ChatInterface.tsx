@@ -41,13 +41,12 @@ export default function ChatInterface() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": "Basic ZWxpemE6clNrdnBmbnRTeQ==",
-            "Accept": "*/*"
+            "Authorization": "Basic ZWxpemE6clNrdnBmbnRTeQ=="
           },
           mode: "cors",
-          credentials: "omit",
-          body: JSON.stringify({ message: inputText }),
-          cache: "no-cache"
+          keepalive: true,
+          credentials: "same-origin",
+          body: JSON.stringify({ message: inputText })
         },
       );
 
