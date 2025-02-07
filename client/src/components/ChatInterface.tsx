@@ -36,12 +36,12 @@ export default function ChatInterface() {
 
     try {
       const response = await fetch(
-        "https://autonome.alt.technology/eliza/chat",
+        `${import.meta.env.VITE_CHATBOT_API_URL}/chat`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Basic ZWxpemE6clNrdnBmbnRTeQ==", // eliza:rSkvpfntSy
+            "Authorization": `Basic ${btoa(`${import.meta.env.VITE_CHATBOT_USERNAME}:${import.meta.env.VITE_CHATBOT_PASSWORD}`)}`
           },
           body: JSON.stringify({ message: inputText }),
         },
