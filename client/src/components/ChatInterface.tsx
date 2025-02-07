@@ -41,11 +41,17 @@ export default function ChatInterface() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": "Basic ZWxpemE6clNrdnBmbnRTeQ=="
+            "Authorization": "Basic ZWxpemE6clNrdnBmbnRTeQ==",
+            "Accept": "application/json"
           },
-          body: JSON.stringify({ message: inputText })
+          mode: "no-cors",
+          body: JSON.stringify({ message: inputText }),
         },
       );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
       const data = await response.json();
 
@@ -53,8 +59,9 @@ export default function ChatInterface() {
     } catch (error) {
       setMessages((prev) => [
         ...prev,
-        { text: "Sorry, I couldn't process your request.", isUser: false },
+        { text: "Sorry, I couldn't process your request.  Please try again later.", isUser: false },
       ]);
+      console.error("Error sending message:", error); //Added for debugging
     } finally {
       setIsLoading(false);
     }
