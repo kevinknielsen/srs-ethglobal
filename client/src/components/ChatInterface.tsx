@@ -44,8 +44,12 @@ export default function ChatInterface() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Basic ZWxpemE6clNrdnBmbnRTeQ=='
+          'Authorization': 'Basic ZWxpemE6clNrdnBmbnRTeQ==',
+          'Accept': 'application/json',
+          'Origin': 'https://autonome.alt.technology'
         },
+        credentials: 'include',
+        mode: 'cors',
         body: JSON.stringify({ message: inputText }),
       });
       
