@@ -40,10 +40,11 @@ export default function ChatInterface() {
     setError(null);
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch('https://autonome.alt.technology/eliza-rwvkai/b850bc30-45f8-0041-a00a-83df46d8555d/message', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Basic ZWxpemE6clNrdnBmbnRTeQ=='
         },
         body: JSON.stringify({ message: inputText }),
       });
