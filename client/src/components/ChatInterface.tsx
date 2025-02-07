@@ -6,6 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
 import { sampleMessages } from "@/lib/sample-data";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 interface Message {
   text: string;
@@ -16,6 +17,7 @@ export default function ChatInterface() {
   const [messages, setMessages] = useState<Message[]>(sampleMessages);
   const [inputText, setInputText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -35,35 +37,51 @@ export default function ChatInterface() {
     setMessages((prev) => [...prev, newMessage]);
     setInputText("");
     setIsLoading(true);
+    setError(null);
 
     try {
-      const response = await fetch("/api/chat", {
+      // Check each environment variable individually for better error messages
+      if (!import.meta.env.VITE_CHATBOT_API_URL) {
+        throw new Error("Chat API URL is not configured");
+      }
+      if (!import.meta.env.VITE_CHATBOT_USERNAME) {
+        throw new Error("Chat username is not configured");
+      }
+      if (!import.meta.env.VITE_CHATBOT_PASSWORD) {
+        throw new Error("Chat password is not configured");
+      }
+
+      const credentials = btoa(`${import.meta.env.VITE_CHATBOT_USERNAME}:${import.meta.env.VITE_CHATBOT_PASSWORD}`);
+
+      const response = await fetch(import.meta.env.VITE_CHATBOT_API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Basic ${credentials}`,
+          "Accept": "application/json, text/plain, */*",
+          "Accept-Language": "en-US,en;q=0.9",
         },
         body: JSON.stringify({ message: inputText })
       });
 
       if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+        if (response.status === 503) {
+          throw new Error("The chat service is temporarily unavailable. Please try again in a few moments.");
+        }
+        throw new Error(`Server error: ${response.status}`);
       }
 
       const data = await response.json();
       if (!data.response) {
-        throw new Error('Invalid response format');
+        throw new Error('Invalid response format from server');
       }
 
       setMessages((prev) => [...prev, { text: data.response, isUser: false }]);
-    } catch (error) {
-      console.error("Error sending message:", error);
-      setMessages((prev) => [
-        ...prev,
-        { 
-          text: "I'm having trouble connecting right now. Please try again in a moment.", 
-          isUser: false 
-        },
-      ]);
+    } catch (err) {
+      console.error("Error sending message:", err);
+      const errorMessage = err instanceof Error ? err.message : "Failed to send message. Please try again.";
+      setError(errorMessage);
+      setMessages((prev) => prev.slice(0, -1)); // Remove the user message if it failed
     } finally {
       setIsLoading(false);
     }
@@ -74,6 +92,13 @@ export default function ChatInterface() {
       <h2 className="text-2xl font-bold mb-6 font-western bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent">
         Fan Chat
       </h2>
+
+      {error && (
+        <Alert variant="destructive" className="mb-4">
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
 
       <ScrollArea className="h-[400px] mb-6 pr-4">
         <div className="space-y-4">
