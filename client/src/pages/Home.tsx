@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { PurchaseButton } from "@/components/PurchaseButton";
 import ChatInterface from "@/components/ChatInterface";
+import AudioPlayer from "@/components/AudioPlayer";
 
 export default function Home() {
   return (
@@ -30,7 +31,7 @@ export default function Home() {
           <section className="text-center space-y-8">
             <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#1D254A] border border-blue-500/20">
               <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
-              <span className="text-sm font-medium text-blue-400">LAUNCHES: MAY 5, 2025</span>
+              <span className="text-sm font-medium text-blue-400">LAUNCHES: MARCH 1, 2025</span>
             </div>
 
             <div className="space-y-6">
@@ -38,33 +39,52 @@ export default function Home() {
                 Steel River Saints
               </h1>
               <p className="text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
-                Join our community of country music lovers and get exclusive access to behind-the-scenes content
+                Steel River Saints is a virtual country artist owned by its fans and managed by artificial intelligence. Purchase a membership below to join the community.
               </p>
             </div>
 
             <div className="grid grid-cols-4 gap-4 max-w-sm mx-auto">
               <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">89</div>
+                <div className="text-2xl font-bold text-white">22</div>
                 <div className="text-xs text-white/40 uppercase">Days</div>
               </div>
               <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">03</div>
+                <div className="text-2xl font-bold text-white">18</div>
                 <div className="text-xs text-white/40 uppercase">Hours</div>
               </div>
               <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">51</div>
+                <div className="text-2xl font-bold text-white">45</div>
                 <div className="text-xs text-white/40 uppercase">Minutes</div>
               </div>
               <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">31</div>
+                <div className="text-2xl font-bold text-white">30</div>
                 <div className="text-xs text-white/40 uppercase">Seconds</div>
               </div>
             </div>
           </section>
 
-          <div className="max-w-sm mx-auto">
+          <div className="max-w-sm mx-auto mb-24">
             <PurchaseButton />
           </div>
+
+          {/* Demo Tracks Section */}
+          <section>
+            <h2 className="text-3xl font-bold text-white mb-8 text-center">Preview Tracks</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <AudioPlayer 
+                title="Demo Track 1"
+                // imageSrc and audioSrc will be added when files are provided
+              />
+              <AudioPlayer 
+                title="Demo Track 2"
+                // imageSrc and audioSrc will be added when files are provided
+              />
+              <AudioPlayer 
+                title="Demo Track 3"
+                // imageSrc and audioSrc will be added when files are provided
+              />
+            </div>
+          </section>
 
           <ChatInterface />
         </div>
