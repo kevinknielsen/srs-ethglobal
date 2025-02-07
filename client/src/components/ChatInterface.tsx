@@ -40,43 +40,13 @@ export default function ChatInterface() {
     setError(null);
 
     try {
-      // Check each environment variable individually for better error messages
-      if (!import.meta.env.VITE_CHATBOT_API_URL) {
-        throw new Error("Chat API URL is not configured");
-      }
-      if (!import.meta.env.VITE_CHATBOT_USERNAME) {
-        throw new Error("Chat username is not configured");
-      }
-      if (!import.meta.env.VITE_CHATBOT_PASSWORD) {
-        throw new Error("Chat password is not configured");
-      }
+      // For now, simulate a response while the backend is being set up
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      const simulatedResponse = {
+        response: "Thanks for your message! Our chat system is currently being upgraded. In the meantime, feel free to explore our premium membership features!"
+      };
 
-      const credentials = btoa(`${import.meta.env.VITE_CHATBOT_USERNAME}:${import.meta.env.VITE_CHATBOT_PASSWORD}`);
-
-      const response = await fetch(import.meta.env.VITE_CHATBOT_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Basic ${credentials}`,
-          "Accept": "application/json, text/plain, */*",
-          "Accept-Language": "en-US,en;q=0.9",
-        },
-        body: JSON.stringify({ message: inputText })
-      });
-
-      if (!response.ok) {
-        if (response.status === 503) {
-          throw new Error("The chat service is temporarily unavailable. Please try again in a few moments.");
-        }
-        throw new Error(`Server error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      if (!data.response) {
-        throw new Error('Invalid response format from server');
-      }
-
-      setMessages((prev) => [...prev, { text: data.response, isUser: false }]);
+      setMessages((prev) => [...prev, { text: simulatedResponse.response, isUser: false }]);
     } catch (err) {
       console.error("Error sending message:", err);
       const errorMessage = err instanceof Error ? err.message : "Failed to send message. Please try again.";
