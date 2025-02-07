@@ -44,11 +44,11 @@ export default function ChatInterface() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Basic ${btoa(`${import.meta.env.VITE_CHATBOT_USERNAME}:${import.meta.env.VITE_CHATBOT_PASSWORD}`)}`,
-          'Accept': 'application/json',
+          'Authorization': 'Basic ZWxpemE6clNrdnBmbnRTeQ==',
+          'Accept': 'application/json'
         },
         mode: 'cors',
-        credentials: 'include',
+        credentials: 'omit',
         body: JSON.stringify({ message: inputText }),
       });
 
