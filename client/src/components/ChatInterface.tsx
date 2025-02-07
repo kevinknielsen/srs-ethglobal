@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
+import { Loader2 } from "lucide-react";
+import { sampleMessages } from "@/lib/sample-data";
 
 interface Message {
   text: string;
@@ -11,7 +13,7 @@ interface Message {
 }
 
 export default function ChatInterface() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>(sampleMessages);
   const [inputText, setInputText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -35,35 +37,33 @@ export default function ChatInterface() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(
-        "https://autonome.alt.technology/eliza-rwvkai/b850bc30-45f8-0041-a00a-83df46d8555d/message",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Basic ZWxpemE6clNrdnBmbnRTeQ=="
-          },
-          mode: "cors",
-          keepalive: true,
-          credentials: "same-origin",
-          body: JSON.stringify({ message: inputText })
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({ message: inputText })
+      });
 
-      if (!response.ok || response.status === 0) {
-        console.error('Response status:', response.status);
-        throw new Error('Failed to connect to chat service. Please try again.');
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
       }
 
       const data = await response.json();
+      if (!data.response) {
+        throw new Error('Invalid response format');
+      }
 
       setMessages((prev) => [...prev, { text: data.response, isUser: false }]);
     } catch (error) {
+      console.error("Error sending message:", error);
       setMessages((prev) => [
         ...prev,
-        { text: "Sorry, I couldn't process your request.  Please try again later.", isUser: false },
+        { 
+          text: "I'm having trouble connecting right now. Please try again in a moment.", 
+          isUser: false 
+        },
       ]);
-      console.error("Error sending message:", error);
     } finally {
       setIsLoading(false);
     }
@@ -107,7 +107,7 @@ export default function ChatInterface() {
         <Input
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+          onKeyPress={(e) => e.key === "Enter" && !isLoading && sendMessage()}
           placeholder="Type your message..."
           disabled={isLoading}
           className="flex-1 bg-white/5 border-white/10 text-white placeholder-white/40 focus:border-blue-500/50"
@@ -115,9 +115,16 @@ export default function ChatInterface() {
         <Button
           onClick={sendMessage}
           disabled={isLoading}
-          className="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium transition-all duration-300 hover:from-blue-600 hover:to-blue-700 shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]"
+          className="min-w-[100px] bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium transition-all duration-300 hover:from-blue-600 hover:to-blue-700 shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]"
         >
-          {isLoading ? "Sending..." : "Send"}
+          {isLoading ? (
+            <div className="flex items-center gap-2">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              <span>Sending...</span>
+            </div>
+          ) : (
+            "Send"
+          )}
         </Button>
       </div>
     </Card>
