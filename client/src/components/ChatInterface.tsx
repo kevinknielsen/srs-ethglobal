@@ -35,7 +35,7 @@ export default function ChatInterface() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_CHATBOT_API_URL}/chat`, {
+      const response = await fetch(import.meta.env.VITE_CHATBOT_API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
