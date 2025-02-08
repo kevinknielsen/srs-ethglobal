@@ -25,13 +25,13 @@ function App() {
 
   return (
     <PrivyProvider
-      appId={"cm6rbnitw01gz1k0i8vnq9nff"}
+      appId={import.meta.env.VITE_PRIVY_APP_ID}
       config={{
         appearance: {
-          accentColor: "#6A6FF5",
-          theme: "#FFFFFF",
+          accentColor: "#8B0000",
+          theme: "dark",
           showWalletLoginFirst: false,
-          logo: "https://auth.privy.io/logos/privy-logo.png",
+          logo: "/images/artist-banner.png",
           walletList: [
             "detected_wallets",
             "phantom",
