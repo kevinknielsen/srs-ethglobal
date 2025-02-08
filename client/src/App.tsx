@@ -47,15 +47,15 @@ function App() {
         embeddedWallets: {
           requireUserPasswordOnCreate: false,
           showWalletUIs: true,
-          createOnLogin: 'users-without-wallets'
+          createOnLogin: 'users-without-wallets',
+          noPromptOnSignature: true
         },
         supportedWallets: [
           "metamask",
-          "phantom",
           "walletconnect"
         ],
         defaultChain: "ethereum",
-        supportedChains: ["ethereum", "polygon"]
+        supportedChains: ["ethereum"]
       }}
     >
       <QueryClientProvider client={queryClient}>
