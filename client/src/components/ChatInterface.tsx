@@ -23,7 +23,7 @@ export default function ChatInterface() {
               <div
                 className={`max-w-[80%] p-4 rounded-lg ${
                   message.isUser
-                    ? 'bg-blue-500/90 text-white ml-auto shadow-[0_0_20px_rgba(59,130,246,0.2)]'
+                    ? 'bg-[#8B0000]/90 text-white ml-auto shadow-[0_0_20px_rgba(139,0,0,0.2)]'
                     : 'bg-white/5 text-white/90 border border-white/10'
                 }`}
               >
@@ -40,9 +40,9 @@ export default function ChatInterface() {
       <div className="flex space-x-3">
         <Input
           placeholder="Type your message..."
-          className="flex-1 bg-white/5 border-white/10 text-white placeholder-white/40 focus:border-blue-500/50"
+          className="flex-1 bg-white/5 border-white/10 text-white placeholder-white/40 focus:border-[#8B0000]/50"
         />
-        <Button className="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium transition-all duration-300 hover:from-blue-600 hover:to-blue-700 shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]">
+        <Button className="bg-gradient-to-r from-[#8B0000] to-[#6B0000] text-white font-medium transition-all duration-300 hover:from-[#6B0000] hover:to-[#4B0000] shadow-[0_0_20px_rgba(139,0,0,0.3)] hover:shadow-[0_0_30px_rgba(139,0,0,0.5)]">
           Send
         </Button>
       </div>
