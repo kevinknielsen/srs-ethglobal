@@ -23,7 +23,7 @@ function App() {
     <PrivyProvider
       appId="cm6verhsy0091polc34fxcm7s"
       config={{
-        loginMethods: ["email", "wallet", "google", "apple", "github", "discord", "twitter", "farcaster"],
+        loginMethods: ["email", "wallet", "google", "twitter", "farcaster"],
         embeddedWallets: {
           createOnLogin: 'users-without-wallets'
         },

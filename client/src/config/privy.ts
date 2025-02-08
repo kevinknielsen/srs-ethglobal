@@ -1,3 +1,4 @@
+
 import type { PrivyProviderProps } from '@privy-io/react-auth';
 
 const appId = import.meta.env.VITE_PRIVY_APP_ID;
@@ -16,7 +17,7 @@ export const privyConfig: PrivyProviderProps = {
       showWalletLoginFirst: false,
       logo: "/images/artist-banner.png",
     },
-    loginMethods: ["email", "wallet", "google", "apple", "github", "discord", "twitter", "farcaster"],
+    loginMethods: ["email", "wallet", "google", "twitter", "farcaster"],
     embeddedWallets: {
       createOnLogin: 'users-without-wallets'
     }
