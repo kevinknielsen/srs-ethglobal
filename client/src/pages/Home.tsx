@@ -41,17 +41,17 @@ export default function Home() {
     {
       title: "Outlaws",
       imageSrc: "/images/srs-1.jpg",
-      audioSrc: "/attached_assets/Outlaws MASTER v2 (1).mp3"
+      audioSrc: "/audio/outlaws-wav.wav"
     },
     {
       title: "The Bottle",
       imageSrc: "/images/srs-2.jpg",
-      audioSrc: "/attached_assets/The Bottle.mp3"
+      audioSrc: "/audio/The Bottle.mp3"
     },
     {
-      title: "Long Lost Shadows",
+      title: "Outlaws",
       imageSrc: "/images/srs-3.jpg",
-      audioSrc: "/attached_assets/long-lost-shadows.mp3"
+      audioSrc: "/audio/outlaws-mp3.mp3"
     },
   ];
 
