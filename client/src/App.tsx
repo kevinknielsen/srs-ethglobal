@@ -25,7 +25,7 @@ function App() {
 
   return (
     <PrivyProvider
-      appId={import.meta.env.VITE_PRIVY_APP_ID}
+      appId="cm6verhsy0091polc34fxcm7s"
       onSuccess={handleLogin}
       config={{
         appearance: {
