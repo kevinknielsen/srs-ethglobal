@@ -13,8 +13,11 @@ export function LoginButton() {
 
   if (authenticated) {
     return (
-      <Button variant="outline">
-        {user?.email || 'Account'}
+      <Button 
+        variant="outline"
+        className="bg-[#8B0000] text-white hover:bg-[#6B0000]"
+      >
+        {user?.email?.toString() || 'Account'}
       </Button>
     );
   }
@@ -23,8 +26,9 @@ export function LoginButton() {
     <Button
       onClick={handleLogin}
       variant="outline"
+      className="bg-[#8B0000] text-white hover:bg-[#6B0000]"
     >
       Login
     </Button>
   );
-} 
+}

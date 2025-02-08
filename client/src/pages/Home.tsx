@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { PurchaseButton } from "@/components/PurchaseButton";
@@ -7,11 +7,40 @@ import AudioCard from "@/components/AudioCard";
 import { ArtistBioModal } from "@/components/ArtistBioModal";
 
 export default function Home() {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+
+  useEffect(() => {
+    const targetDate = new Date('2025-03-01T00:00:00');
+
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60)
+        });
+      }
+    };
+
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   const demoTracks = [
     {
       title: "Steel River Nights",
       imageSrc: "/images/srs-1.jpg",
-      // audioSrc will be added when files are provided
     },
     {
       title: "The Bottle",
@@ -21,7 +50,6 @@ export default function Home() {
     {
       title: "Southern Starlight",
       imageSrc: "/images/srs-3.jpg",
-      // audioSrc will be added when files are provided
     },
   ];
 
@@ -32,7 +60,7 @@ export default function Home() {
       <motion.main 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative container mx-auto px-4 py-24"
+        className="relative container mx-auto px-4 py-16"
       >
         <div className="absolute inset-0 z-0">
           <div 
@@ -45,11 +73,11 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto space-y-24">
+        <div className="relative z-10 max-w-4xl mx-auto space-y-16">
           <section className="text-center space-y-8">
-            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#1D254A] border border-blue-500/20">
-              <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
-              <span className="text-sm font-medium text-blue-400">LAUNCHES: MARCH 1, 2025</span>
+            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#1D1717] border border-[#8B0000]/20">
+              <div className="w-2 h-2 rounded-full bg-[#8B0000] animate-pulse"></div>
+              <span className="text-sm font-medium text-[#8B0000]">LAUNCHES: MARCH 1, 2025</span>
             </div>
 
             <div className="space-y-6">
@@ -62,37 +90,34 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-4 gap-4 max-w-sm mx-auto">
-              <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">21</div>
+              <div className="bg-[#1D1717] rounded-xl p-3 border border-[#8B0000]/10">
+                <div className="text-2xl font-bold text-white">{timeLeft.days}</div>
                 <div className="text-xs text-white/40 uppercase">Days</div>
               </div>
-              <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">14</div>
+              <div className="bg-[#1D1717] rounded-xl p-3 border border-[#8B0000]/10">
+                <div className="text-2xl font-bold text-white">{timeLeft.hours}</div>
                 <div className="text-xs text-white/40 uppercase">Hours</div>
               </div>
-              <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">35</div>
+              <div className="bg-[#1D1717] rounded-xl p-3 border border-[#8B0000]/10">
+                <div className="text-2xl font-bold text-white">{timeLeft.minutes}</div>
                 <div className="text-xs text-white/40 uppercase">Minutes</div>
               </div>
-              <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">20</div>
+              <div className="bg-[#1D1717] rounded-xl p-3 border border-[#8B0000]/10">
+                <div className="text-2xl font-bold text-white">{timeLeft.seconds}</div>
                 <div className="text-xs text-white/40 uppercase">Seconds</div>
               </div>
             </div>
           </section>
 
-          {/* Purchase Button Section */}
           <div className="max-w-sm mx-auto">
             <PurchaseButton />
           </div>
 
-          {/* Artist Bio Modal */}
           <div className="max-w-2xl mx-auto px-4">
             <ArtistBioModal />
           </div>
 
-          {/* Demo Tracks Section */}
-          <section className="py-12">
+          <section className="py-8">
             <h2 className="text-3xl font-bold text-center text-white mb-8">Preview Tracks</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {demoTracks.map((track, index) => (

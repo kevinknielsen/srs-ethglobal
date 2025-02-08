@@ -41,7 +41,7 @@ export function PurchaseButton() {
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>
         <Button 
-          className="w-full h-12 bg-gradient-to-r from-[#2563EB] to-[#3B82F6] text-white rounded-xl font-medium transition-all duration-300 hover:from-[#1D4ED8] hover:to-[#2563EB] shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]"
+          className="w-full h-12 bg-gradient-to-r from-[#8B0000] to-[#6B0000] text-white rounded-xl font-medium transition-all duration-300 hover:from-[#6B0000] hover:to-[#4B0000] shadow-[0_0_20px_rgba(139,0,0,0.3)] hover:shadow-[0_0_30px_rgba(139,0,0,0.5)]"
         >
           {authenticated ? "Purchase Premium Membership" : "Purchase Membership"}
         </Button>
@@ -54,7 +54,7 @@ export function PurchaseButton() {
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-6">
-          <div className="bg-[#0D1021] rounded-xl p-6 border border-white/10">
+          <div className="bg-[#1D1717] rounded-xl p-6 border border-[#8B0000]/10">
             <div className="flex items-center justify-between mb-4">
               <span className="text-lg font-semibold text-white">Premium Membership</span>
               <span className="text-2xl font-bold text-white">$19.99</span>
@@ -77,7 +77,7 @@ export function PurchaseButton() {
 
           <Button 
             onClick={handlePurchaseClick}
-            className="w-full bg-gradient-to-r from-blue-500 to-blue-600"
+            className="w-full bg-gradient-to-r from-[#8B0000] to-[#6B0000]"
           >
             {authenticated ? "Continue to Payment" : "Sign In to Purchase"}
           </Button>
@@ -85,4 +85,4 @@ export function PurchaseButton() {
       </DialogContent>
     </Dialog>
   );
-} 
+}
