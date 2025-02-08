@@ -22,7 +22,14 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': 'http://localhost:3001', // Adjust port if needed
+      '/api': 'http://localhost:3001',
     },
+    cors: true,
+    host: '0.0.0.0',
+    port: 3000,
+    hmr: {
+      host: '0.0.0.0',
+      protocol: 'ws'
+    }
   },
 });

@@ -1,0 +1,19 @@
+`defaultChain` must be included in `supportedChains`
+at p41 (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/@privy-io_react-auth.js?v=03e40189:66853:56)
+at d27 (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/@privy-io_react-auth.js?v=03e40189:66832:381)
+at https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/@privy-io_react-auth.js?v=03e40189:66869:94
+at mountMemo (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LQCVLUPF.js?v=03e40189:12194:27)
+at Object.useMemo (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LQCVLUPF.js?v=03e40189:12518:24)
+at useMemo (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-2ZCBPYXF.js?v=03e40189:1094:29)
+at h23 (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/@privy-io_react-auth.js?v=03e40189:66869:87)
+at renderWithHooks (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LQCVLUPF.js?v=03e40189:11548:26)
+at mountIndeterminateComponent (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LQCVLUPF.js?v=03e40189:14926:21)
+at beginWork (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-LQCVLUPF.js?v=03e40189:15914:22)
+The above error occurred in the <h23> component:
+
+    at h23 (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/@privy-io_react-auth.js?v=03e40189:66868:24)
+    at Ya2 (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/@fs/home/runner/workspace/node_modules/.vite/deps/@privy-io_react-auth.js?v=03e40189:108804:22)
+    at App (https://889468a5-1b5e-4e15-9b61-3db2b9277af2-00-2rko0wbffa60q.riker.replit.dev:3000/src/App.tsx?v=yi_j3UplHyDhzw3aT-V19:47:27)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
