@@ -34,16 +34,6 @@ function App() {
           showWalletLoginFirst: false,
           logo: "/images/artist-banner.png",
         },
-        loginMethods: ['email', 'wallet'],
-        defaultChain: 'ethereum',
-        embeddedWallets: {
-          createOnLogin: 'users-without-wallets',
-        },
-        supportedWallets: [
-          "metamask",
-          "phantom",
-          "walletconnect"
-        ],
         loginMethods: [
           "email",
           "wallet",
@@ -57,15 +47,15 @@ function App() {
         embeddedWallets: {
           requireUserPasswordOnCreate: false,
           showWalletUIs: true,
-          ethereum: {
-            createOnLogin: "users-without-wallets"
-          },
-          solana: {
-            createOnLogin: "users-without-wallets"
-          }
+          createOnLogin: 'users-without-wallets'
         },
+        supportedWallets: [
+          "metamask",
+          "phantom",
+          "walletconnect"
+        ],
         defaultChain: "ethereum",
-        supportedChains: ["ethereum", "polygon"],
+        supportedChains: ["ethereum", "polygon"]
       }}
     >
       <QueryClientProvider client={queryClient}>
