@@ -45,12 +45,12 @@ function App() {
           "farcaster"
         ],
         embeddedWallets: {
-          createOnLogin: 'users-without-wallets',
-          noPromptOnSignature: true
+          createOnLogin: 'users-without-wallets'
         },
-        walletConnectProjectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
-        defaultChain: 'ethereum-mainnet',
-        supportedChains: ['ethereum-mainnet']
+        wallets: {
+          metamask: { enabled: true },
+          walletconnect: { enabled: true }
+        }
       }}
     >
       <QueryClientProvider client={queryClient}>
