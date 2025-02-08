@@ -87,7 +87,7 @@ export default function Home() {
 
           {/* Demo Tracks Section */}
           <section className="py-12">
-            <h2 className="text-3xl font-bold text-center text-white mb-8">Artist Demos</h2>
+            <h2 className="text-3xl font-bold text-center text-white mb-8">Preview Tracks</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {demoTracks.map((track, index) => (
                 <AudioCard
