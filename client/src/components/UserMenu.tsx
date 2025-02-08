@@ -13,10 +13,11 @@ export function UserMenu() {
 
   if (!authenticated) return null;
 
-  // Safely get display name
-  const displayName = typeof user?.email === 'string' 
-    ? user.email.split('@')[0] 
-    : user?.wallet?.address?.slice(0, 6) 
+  // Safely get display name with proper type handling
+  const emailStr = user?.email?.toString();
+  const displayName = emailStr
+    ? emailStr.split('@')[0]
+    : user?.wallet?.address?.slice(0, 6)
     ?? 'User';
 
   return (
@@ -32,8 +33,8 @@ export function UserMenu() {
       <DropdownMenuContent align="end" className="w-56 bg-black/90 text-white border-white/10">
         <DropdownMenuItem className="flex-col items-start">
           <div className="font-medium">{displayName}</div>
-          {typeof user?.email === 'string' && (
-            <div className="text-xs text-white/60">{user.email}</div>
+          {emailStr && (
+            <div className="text-xs text-white/60">{emailStr}</div>
           )}
         </DropdownMenuItem>
         <DropdownMenuItem 
@@ -45,4 +46,4 @@ export function UserMenu() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-} 
+}

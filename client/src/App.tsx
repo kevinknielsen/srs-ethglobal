@@ -19,14 +19,9 @@ function Router() {
 function App() {
   const [, setLocation] = useLocation();
 
-  const handleLogin = () => {
-    setLocation('/dashboard');
-  };
-
   return (
     <PrivyProvider
       appId="cm6verhsy0091polc34fxcm7s"
-      onSuccess={handleLogin}
       config={{
         appearance: {
           accentColor: "#8B0000",
@@ -34,22 +29,9 @@ function App() {
           showWalletLoginFirst: false,
           logo: "/images/artist-banner.png",
         },
-        loginMethods: [
-          "email",
-          "wallet",
-          "google",
-          "apple",
-          "github",
-          "discord",
-          "twitter",
-          "farcaster"
-        ],
+        loginMethods: ["email", "wallet", "google", "apple", "github", "discord", "twitter", "farcaster"],
         embeddedWallets: {
           createOnLogin: 'users-without-wallets'
-        },
-        wallets: {
-          metamask: { enabled: true },
-          walletconnect: { enabled: true }
         }
       }}
     >
