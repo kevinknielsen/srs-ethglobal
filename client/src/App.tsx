@@ -26,13 +26,19 @@ function App() {
   return (
     <PrivyProvider
       appId={import.meta.env.VITE_PRIVY_APP_ID}
+      onSuccess={handleLogin}
       config={{
         appearance: {
           accentColor: "#8B0000",
           theme: "dark",
           showWalletLoginFirst: false,
           logo: "/images/artist-banner.png",
-          walletList: [
+        },
+        loginMethods: ['email', 'wallet'],
+        defaultChain: 'ethereum',
+        embeddedWallets: {
+          createOnLogin: 'users-without-wallets',
+        },
             "detected_wallets",
             "phantom",
             "solflare",
