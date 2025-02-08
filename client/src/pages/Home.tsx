@@ -39,8 +39,9 @@ export default function Home() {
 
   const demoTracks = [
     {
-      title: "Steel River Nights",
+      title: "Outlaws",
       imageSrc: "/images/srs-1.jpg",
+      audioSrc: "/audio/outlaws-wav.wav"
     },
     {
       title: "The Bottle",
@@ -48,8 +49,9 @@ export default function Home() {
       audioSrc: "/audio/The Bottle.mp3"
     },
     {
-      title: "Southern Starlight",
+      title: "Outlaws",
       imageSrc: "/images/srs-3.jpg",
+      audioSrc: "/audio/outlaws-mp3.mp3"
     },
   ];
 
