@@ -64,8 +64,8 @@ function App() {
             createOnLogin: "users-without-wallets"
           }
         },
-        defaultChainId: 1, // Ethereum mainnet
-        supportedChainIds: [1, 137], // Ethereum and Polygon
+        defaultChain: "ethereum",
+        supportedChains: ["ethereum", "polygon"],
       }}
     >
       <QueryClientProvider client={queryClient}>
