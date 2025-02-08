@@ -39,13 +39,11 @@ function App() {
         embeddedWallets: {
           createOnLogin: 'users-without-wallets',
         },
-            "detected_wallets",
-            "phantom",
-            "solflare",
-            "backpack",
-            "okx_wallet"
-          ]
-        },
+        supportedWallets: [
+          "metamask",
+          "phantom",
+          "walletconnect"
+        ],
         loginMethods: [
           "email",
           "wallet",
