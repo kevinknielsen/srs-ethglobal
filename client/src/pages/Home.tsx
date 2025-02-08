@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import { PurchaseButton } from "@/components/PurchaseButton";
 import ChatInterface from "@/components/ChatInterface";
 import AudioCard from "@/components/AudioCard";
+import { ArtistBioModal } from "@/components/ArtistBioModal";
 
 export default function Home() {
   const demoTracks = [
@@ -83,6 +84,11 @@ export default function Home() {
           {/* Purchase Button Section */}
           <div className="max-w-sm mx-auto">
             <PurchaseButton />
+          </div>
+
+          {/* Artist Bio Modal */}
+          <div className="max-w-2xl mx-auto px-4">
+            <ArtistBioModal />
           </div>
 
           {/* Demo Tracks Section */}
