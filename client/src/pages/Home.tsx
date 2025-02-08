@@ -3,9 +3,27 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { PurchaseButton } from "@/components/PurchaseButton";
 import ChatInterface from "@/components/ChatInterface";
-import AudioPlayer from "@/components/AudioPlayer";
+import AudioCard from "@/components/AudioCard";
 
 export default function Home() {
+  const demoTracks = [
+    {
+      title: "Steel River Nights",
+      imageSrc: "/images/srs-1.jpg",
+      // audioSrc will be added when files are provided
+    },
+    {
+      title: "The Bottle",
+      imageSrc: "/images/srs-2.jpg",
+      audioSrc: "/audio/The Bottle.mp3"
+    },
+    {
+      title: "Southern Starlight",
+      imageSrc: "/images/srs-3.jpg",
+      // audioSrc will be added when files are provided
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
@@ -15,7 +33,6 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         className="relative container mx-auto px-4 py-24"
       >
-        {/* Background image with overlay */}
         <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center opacity-30"
@@ -39,50 +56,47 @@ export default function Home() {
                 Steel River Saints
               </h1>
               <p className="text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
-                Steel River Saints is a virtual country artist owned by its fans and managed by artificial intelligence. Purchase a membership below to join the community.
+                Steel River Saints is a virtual country artist owned by its fans and managed by artificial intelligence; purchase a membership below to join the community.
               </p>
             </div>
 
             <div className="grid grid-cols-4 gap-4 max-w-sm mx-auto">
               <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">22</div>
+                <div className="text-2xl font-bold text-white">21</div>
                 <div className="text-xs text-white/40 uppercase">Days</div>
               </div>
               <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">18</div>
+                <div className="text-2xl font-bold text-white">14</div>
                 <div className="text-xs text-white/40 uppercase">Hours</div>
               </div>
               <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">45</div>
+                <div className="text-2xl font-bold text-white">35</div>
                 <div className="text-xs text-white/40 uppercase">Minutes</div>
               </div>
               <div className="bg-[#0D1021] rounded-xl p-3 border border-white/5">
-                <div className="text-2xl font-bold text-white">30</div>
+                <div className="text-2xl font-bold text-white">20</div>
                 <div className="text-xs text-white/40 uppercase">Seconds</div>
               </div>
             </div>
           </section>
 
-          <div className="max-w-sm mx-auto mb-24">
+          {/* Purchase Button Section */}
+          <div className="max-w-sm mx-auto">
             <PurchaseButton />
           </div>
 
           {/* Demo Tracks Section */}
-          <section>
-            <h2 className="text-3xl font-bold text-white mb-8 text-center">Preview Tracks</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <AudioPlayer 
-                title="Demo Track 1"
-                // imageSrc and audioSrc will be added when files are provided
-              />
-              <AudioPlayer 
-                title="Demo Track 2"
-                // imageSrc and audioSrc will be added when files are provided
-              />
-              <AudioPlayer 
-                title="Demo Track 3"
-                // imageSrc and audioSrc will be added when files are provided
-              />
+          <section className="py-12">
+            <h2 className="text-3xl font-bold text-center text-white mb-8">Preview Tracks</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {demoTracks.map((track, index) => (
+                <AudioCard
+                  key={index}
+                  title={track.title}
+                  imageSrc={track.imageSrc}
+                  audioSrc={track.audioSrc}
+                />
+              ))}
             </div>
           </section>
 
