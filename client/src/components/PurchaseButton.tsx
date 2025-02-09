@@ -2,12 +2,11 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FundCard } from "@coinbase/onchainkit/fund";
+import { FundButton } from "@coinbase/onchainkit/fund";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -33,22 +32,19 @@ export function PurchaseButton() {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Purchase Steel River Saints Membership</DialogTitle>
-          <DialogDescription>
-            Join the Steel River Saints community and get access to exclusive content and features.
-          </DialogDescription>
         </DialogHeader>
 
         <div>
           <div className="text-sm font-medium mb-4">
-            Select payment amount and method:
+            Join the Steel River Saints community and get access to exclusive content and features.
           </div>
 
           <div className="bg-[#1D1717] rounded-xl p-4 border border-[#8B0000]/10">
-            <FundCard
+            <FundButton
               assetSymbol="USDC"
               country="US"
               currency="USD"
-              presetAmountInputs={isDevelopment ? developmentAmounts : productionAmounts}
+              amount={isDevelopment ? "0.50" : "5.00"}
               onSuccess={() => {
                 toast({
                   title: "Payment successful!",
@@ -56,10 +52,13 @@ export function PurchaseButton() {
                 });
                 setDialogOpen(false);
               }}
-              headerText="Purchase Membership"
-              buttonText="Pay Now"
-              toAddress="0x48cD33D0F7A1660Ec029f41f41eE773E38639bDA"
-              paymentMethods={["card", "coinbase", "applepay"]}
+              onError={(e) => {
+                toast({
+                  title: "Payment failed",
+                  description: e?.toString() || "Payment could not be processed",
+                  variant: "destructive",
+                });
+              }}
             />
           </div>
         </div>
