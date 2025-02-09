@@ -8,6 +8,8 @@ import NotFound from "@/pages/not-found";
 import { Switch, Route } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import { Providers } from './providers';
+import '@coinbase/onchainkit/styles.css';
 import "./index.css";
 
 function Router() {
@@ -19,56 +21,18 @@ function Router() {
   );
 }
 
-async function syncUserData(privyUserId: string, email: string | null, wallets: string[]) {
-  try {
-    const userData = {
-      privyUserId,
-      email,
-      walletAddresses: wallets,
-      authMethod: email ? 'email' : 'wallet'
-    };
-
-    await apiRequest('/api/users', {
-      method: 'POST',
-      body: JSON.stringify(userData),
-    });
-  } catch (error) {
-    console.error('Failed to sync user data:', error);
-  }
-}
-
 function App() {
-  const { toast } = useToast();
-
-  const handleLoginComplete = async (user: PrivyUser) => {
-    try {
-      const email = user.email?.address || null;
-      const wallets = user.linkedAccounts?.filter(account => account.type === 'wallet')
-        .map(wallet => wallet.address) || [];
-
-      await syncUserData(user.id, email, wallets);
-      queryClient.invalidateQueries({ queryKey: ['/api/users'] });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to sync user data. Please try again.",
-        variant: "destructive",
-      });
-    }
-  };
-
   return (
-    <PrivyProvider
-      {...privyConfig}
-      onLoginComplete={handleLoginComplete}
-    >
-      <QueryClientProvider client={queryClient}>
-        <div className="min-h-screen bg-black text-white">
-          <Router />
-          <Toaster />
-        </div>
-      </QueryClientProvider>
-    </PrivyProvider>
+    <Providers>
+      <PrivyProvider {...privyConfig}>
+        <QueryClientProvider client={queryClient}>
+          <div className="min-h-screen bg-black text-white">
+            <Router />
+            <Toaster />
+          </div>
+        </QueryClientProvider>
+      </PrivyProvider>
+    </Providers>
   );
 }
 

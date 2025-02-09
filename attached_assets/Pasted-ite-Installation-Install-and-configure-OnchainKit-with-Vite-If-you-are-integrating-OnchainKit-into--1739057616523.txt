@@ -1,0 +1,101 @@
+ite Installation
+Install and configure OnchainKit with Vite. If you are integrating OnchainKit into an existing project, skip to the OnchainKit installation.
+
+Install Vite
+Create a new Vite project by using the Vite CLI. More information about Vite can be found here.
+
+npm
+yarn
+pnpm
+bun
+
+npm create vite@latest
+During the setup process you will encounter multiple prompts. Make sure you select React and TypeScript.
+
+Install OnchainKit
+Add OnchainKit to your project by installing the @coinbase/onchainkit package.
+
+npm
+yarn
+pnpm
+bun
+
+npm install @coinbase/onchainkit
+Get A Client API Key
+Get your Client API Key from Coinbase Developer Platform.
+
+OnchainKit copy Client API Key
+Create a .env file in your project's root directory.
+
+OnchainKit define Client API Key
+Add your Client API Key to the .env file:
+
+.env
+
+VITE_PUBLIC_ONCHAINKIT_API_KEY=YOUR_CLIENT_API_KEY
+Add Providers
+Create a providers.tsx file. Add OnchainKitProvider with your desired config.
+
+Under the hood, OnchainKit will create our recommended Wagmi and QueryClient providers. If you wish to customize these providers, check out Custom Supplemental Providers.
+
+providers.tsx
+
+'use client';
+ 
+import type { ReactNode } from 'react';
+import { OnchainKitProvider } from '@coinbase/onchainkit';
+import { base } from 'wagmi/chains'; // add baseSepolia for testing
+ 
+export function Providers(props: { children: ReactNode }) {
+  return (
+    <OnchainKitProvider
+      apiKey={import.meta.env.VITE_PUBLIC_ONCHAINKIT_API_KEY}
+      chain={base} // add baseSepolia for testing
+    >
+      {props.children}
+    </OnchainKitProvider>
+  );
+}
+Wrap your app with <Providers />
+After configuring the providers in step 4, wrap your app with the <Providers /> component.
+
+
+import { Providers } from 'src/Providers';
+ 
+export default function App() {
+  return (
+    <Providers>
+      <YourApp />
+    </Providers>
+  );
+}
+Import OnchainKit Styles
+OnchainKit components come with pre-configured styles. To include these styles in your project, add the following import statement at the top of the file where imported <Providers />:
+
+
+import { Providers } from 'src/Providers';
+import '@coinbase/onchainkit/styles.css'; 
+ 
+export default function App() {
+  return (
+    <Providers>
+      <YourApp />
+    </Providers>
+  );
+}
+This ensures that the OnchainKit styles are loaded and applied to your entire application.
+
+For Tailwind CSS users, check out our Tailwind Integration Guide.
+
+Update the appearance of components by using our built-in themes or crafting your own custom theme. Explore the possibilities in our Theming Guide.
+
+Start building!
+Explore our ready-to-use onchain components:
+Identity - Show Basenames, avatars, badges, and addresses.
+Wallet - Create or connect wallets with Connect Wallet.
+Transaction - Handle transactions using EOAs or Smart Wallets.
+Checkout - Integrate USDC checkout flows with ease.
+Fund - Create a funding flow to onboard users.
+Tokens - Search and display tokens with various components.
+Swap - Enable token swaps in your app.
+Mint - View and Mint NFTs in your app.
