@@ -6,7 +6,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
@@ -69,12 +68,12 @@ export function PurchaseButton() {
 
             <div className="bg-[#1D1717] rounded-xl p-4 border border-[#8B0000]/10">
               <FundCard
-                assetSymbol="ETH"
+                assetSymbol="USDC"
                 country="US"
                 currency="USD"
                 presetAmountInputs={isDevelopment ? ['0.10', '0.50', '1.00'] as const : ['2.00', '5.00', '10.00'] as const}
                 headerText="Purchase Premium Membership"
-                buttonText="Purchase with Crypto"
+                buttonText="Checkout Now"
                 onSuccess={(transactionHash) => {
                   console.log('Transaction successful:', transactionHash);
                   toast({
@@ -83,7 +82,8 @@ export function PurchaseButton() {
                   });
                   setDialogOpen(false);
                 }}
-                destinationAddress="0x48cD33D0F7A1660Ec029f41f41eE773E38639bDA"
+                network={isDevelopment ? "base-sepolia" : "base"}
+                toAddress="0x48cD33D0F7A1660Ec029f41f41eE773E38639bDA"
               />
             </div>
           </div>
