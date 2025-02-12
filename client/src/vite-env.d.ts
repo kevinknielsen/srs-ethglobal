@@ -1,9 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_PRIVY_APP_ID: string
-  readonly VITE_COINBASE_API_KEY: string
-  readonly VITE_ONCHAINKIT_API_KEY: string
+  // Add any required env vars here
 }
 
 interface ImportMeta {

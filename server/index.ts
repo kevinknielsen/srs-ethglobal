@@ -48,9 +48,8 @@ app.use((req, res, next) => {
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
-    log(`Error: ${message}`); // Add error logging
+    log(`Error: ${message}`);
     res.status(status).json({ message });
-    // Remove the throw statement that was causing crashes
   });
 
   if (app.get("env") === "development") {
@@ -59,9 +58,9 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  const PORT = process.env.PORT || 5001;
+  const PORT = 5000; // Changed from process.env.PORT || 5001
 
-  const startServer = async (retryPort = Number(PORT)) => {
+  const startServer = async (retryPort = PORT) => {
     server.once('error', (err: any) => {
       if (err.code === 'EADDRINUSE') {
         log(`Port ${retryPort} is busy, trying ${retryPort + 1}`);

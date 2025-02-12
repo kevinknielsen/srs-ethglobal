@@ -20,9 +20,10 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
-  app.get('/api/users/privy/:privyUserId', async (req, res) => {
+  app.get('/api/users/:id', async (req, res) => {
     try {
-      const user = await storage.getUserByPrivyId(req.params.privyUserId);
+      const userId = parseInt(req.params.id);
+      const user = await storage.getUser(userId);
       if (!user) {
         res.status(404).json({ message: "User not found" });
         return;
@@ -30,23 +31,6 @@ export function registerRoutes(app: Express): Server {
       res.json(user);
     } catch (error) {
       res.status(500).json({ message: "Failed to get user" });
-    }
-  });
-
-  app.patch('/api/users/:id/wallets', async (req, res) => {
-    try {
-      const userId = parseInt(req.params.id);
-      const { walletAddresses } = req.body;
-
-      if (!Array.isArray(walletAddresses)) {
-        res.status(400).json({ message: "walletAddresses must be an array" });
-        return;
-      }
-
-      const user = await storage.updateUserWallets(userId, walletAddresses);
-      res.json(user);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to update user wallets" });
     }
   });
 
