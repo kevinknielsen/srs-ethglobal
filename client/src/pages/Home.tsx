@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Link } from "wouter";
 import { StatsGraph } from "@/components/StatsGraph";
+import { ReleasesSection } from "@/components/ReleasesSection";
 
 export default function Home() {
   return (
@@ -56,6 +57,8 @@ export default function Home() {
               timestamp="Nov 6, 2024, 11:46AM"
             />
           </section>
+
+          <ReleasesSection />
         </div>
       </motion.main>
     </div>
