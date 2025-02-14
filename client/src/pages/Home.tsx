@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { Link } from "wouter";
+import { StatsGraph } from "@/components/StatsGraph";
 
 export default function Home() {
   return (
@@ -41,6 +42,19 @@ export default function Home() {
                 </a>
               </Link>
             </div>
+          </section>
+
+          <section className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <StatsGraph 
+              title="Tracks Registered"
+              value="1.06M"
+              timestamp="Nov 6, 2024, 12:12noon"
+            />
+            <StatsGraph 
+              title="Artists"
+              value="1.06M"
+              timestamp="Nov 6, 2024, 12:12noon"
+            />
           </section>
         </div>
       </motion.main>
