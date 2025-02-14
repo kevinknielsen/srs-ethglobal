@@ -2,7 +2,7 @@ import { ReleaseCard } from "./ReleaseCard";
 import { Button } from "./ui/button";
 import { useState } from "react";
 
-const tabs = ["What's new", "Top Movers", "Top Earning"] as const;
+const tabs = ["Top Movers", "Top Earning", "What's new"] as const;
 
 export function ReleasesSection() {
   const [activeTab, setActiveTab] = useState<typeof tabs[number]>("What's new");
@@ -55,7 +55,7 @@ export function ReleasesSection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {releases.map((release, i) => (
           <ReleaseCard key={i} {...release} />
         ))}
