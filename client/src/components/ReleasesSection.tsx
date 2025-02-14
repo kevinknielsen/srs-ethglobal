@@ -9,7 +9,7 @@ export function ReleasesSection() {
 
   const releases = [
     {
-      title: "Steel River Saints",
+      title: "The Bottle",
       artist: "Steel River Saints",
       imageSrc: "/images/artist-banner.png",
       isrc: "OZNB82517697",
