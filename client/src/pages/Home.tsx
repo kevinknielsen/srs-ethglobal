@@ -27,10 +27,10 @@ export default function Home() {
           <section className="text-center space-y-8">
             <div className="space-y-6">
               <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/50 font-western tracking-wide">
-                Steel River Saints
+                Coda Collective
               </h1>
-              <p className="text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
-                A virtual country artist platform powered by AI and owned by the community
+              <p className="text-lg text-white/60 max-w-3xl mx-auto leading-relaxed">
+                The Label That Works for You, Not Against You—Where Artists Keep 100% of Their Rights, Royalties, and Control.
               </p>
             </div>
 
