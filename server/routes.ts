@@ -60,6 +60,72 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
+  // Project routes
+  app.get('/api/projects', async (req, res) => {
+    try {
+      // For demo purposes, returning Steel River Saints as sample data
+      const sampleProjects = [
+        {
+          id: 1,
+          title: "Steel River Saints",
+          description: "A virtual country artist owned by its fans and managed by artificial intelligence",
+          coverImage: "/images/srs-1.jpg",
+          fundingProgress: 75,
+          fundingGoal: 100000,
+          amountRaised: 75000,
+          releaseDate: "2025-03-01T00:00:00.000Z",
+          status: "active"
+        }
+      ];
+
+      res.json(sampleProjects);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch projects" });
+    }
+  });
+
+  // Stats route
+  app.get('/api/stats', async (req, res) => {
+    try {
+      // Sample statistics data
+      const stats = {
+        totalInvestors: 1500,
+        totalInvested: 2500000,
+        averageReturn: 40,
+        projectCount: 25,
+        monthlyData: [
+          { month: 'Jan', invested: 150000 },
+          { month: 'Feb', invested: 200000 },
+          { month: 'Mar', invested: 300000 }
+        ]
+      };
+
+      res.json(stats);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch statistics" });
+    }
+  });
+
+  // Latest releases route
+  app.get('/api/releases/latest', async (req, res) => {
+    try {
+      // Sample latest release data using Steel River Saints
+      const latestRelease = {
+        id: 1,
+        title: "Steel River Saints",
+        description: "A virtual country artist owned by its fans and managed by artificial intelligence",
+        coverImage: "/images/srs-1.jpg",
+        fundingProgress: 75,
+        fundingGoal: 100000,
+        releaseDate: "2025-03-01T00:00:00.000Z"
+      };
+
+      res.json(latestRelease);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch latest release" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
