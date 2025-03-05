@@ -8,12 +8,51 @@ import { ZodError } from "zod";
 const projectsData = [
   {
     id: 1,
-    title: "Steel River Saints",
+    title: "The Bottle",
+    artist: "Steel River Saints",
     description: "A virtual country artist owned by its fans and managed by artificial intelligence",
     fundingGoal: 100000,
     amountRaised: 75000,
     status: "funding",
-    coverImage: "/images/artist-banner.png"
+    coverImage: "/images/artist-banner.png",
+    isrc: "02NBB2517697",
+    earnings: 25000
+  },
+  {
+    id: 2,
+    title: "Midnight in Tokyo",
+    artist: "Neon Drift",
+    description: "Electronic music producer pushing the boundaries of synthwave",
+    fundingGoal: 80000,
+    amountRaised: 45000,
+    status: "in_progress",
+    coverImage: "/images/neon-drift.jpg",
+    isrc: "0ZNBB2517698",
+    earnings: 18500
+  },
+  {
+    id: 3,
+    title: "Desert Storm",
+    artist: "The Sandstorm Collective",
+    description: "Middle Eastern-influenced electronic music collective",
+    fundingGoal: 60000,
+    amountRaised: 30000,
+    status: "funding",
+    coverImage: "/images/desert-storm.jpg",
+    isrc: "02N0W245G750",
+    earnings: 12300
+  },
+  {
+    id: 4,
+    title: "Digital Dreams",
+    artist: "Cyber Symphony",
+    description: "Space-themed orchestral compositions with electronic elements",
+    fundingGoal: 75000,
+    amountRaised: 25000,
+    status: "funding",
+    coverImage: "/images/digital-dreams.jpg",
+    isrc: "02N0W248332Z",
+    earnings: 9800
   }
 ];
 
