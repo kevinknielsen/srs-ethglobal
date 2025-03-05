@@ -11,22 +11,17 @@ interface ProjectData {
   fundingGoal: number;
   amountRaised: number;
   status: string;
-  milestones: Array<{
-    id: number;
-    name: string;
-    status: "locked" | "pending_approval" | "unlocked";
-  }>;
+  coverImage: string;
 }
 
 export default function ArtistDashboard() {
   const [location] = useLocation();
-
-  const { data: projectData, isLoading } = useQuery<ProjectData>({
-    queryKey: ['/api/artist/project'],
+  const { data: projects, isLoading } = useQuery<ProjectData[]>({
+    queryKey: ['/api/user/projects'],
     queryFn: async () => {
-      const response = await fetch('/api/artist/project');
+      const response = await fetch('/api/user/projects');
       if (!response.ok) {
-        throw new Error('Failed to fetch project data');
+        throw new Error('Failed to fetch projects');
       }
       return response.json();
     }
@@ -34,8 +29,8 @@ export default function ArtistDashboard() {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-black">
-        <div className="text-white">Loading project data...</div>
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-white">Loading projects...</div>
       </div>
     );
   }
@@ -85,63 +80,62 @@ export default function ArtistDashboard() {
           animate={{ opacity: 1, y: 0 }}
           className="max-w-7xl mx-auto space-y-8"
         >
-          <div>
-            <h1 className="text-3xl font-bold text-white mb-8">
-              Project Overview
+          <div className="flex justify-between items-center">
+            <h1 className="text-3xl font-bold text-white">
+              My Projects
             </h1>
-
-            {/* Project Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card className="bg-[#111111] border-white/10 p-6">
-                <div>
-                  <p className="text-sm text-white/60">Funding Goal</p>
-                  <p className="text-2xl font-bold text-white mt-1">
-                    ${projectData?.fundingGoal.toLocaleString()}
-                  </p>
-                </div>
-              </Card>
-
-              <Card className="bg-[#111111] border-white/10 p-6">
-                <div>
-                  <p className="text-sm text-white/60">Amount Raised</p>
-                  <p className="text-2xl font-bold text-white mt-1">
-                    ${projectData?.amountRaised.toLocaleString()}
-                  </p>
-                </div>
-              </Card>
-
-              <Card className="bg-[#111111] border-white/10 p-6">
-                <div>
-                  <p className="text-sm text-white/60">Project Status</p>
-                  <p className="text-2xl font-bold text-white mt-1 capitalize">
-                    {projectData?.status}
-                  </p>
-                </div>
-              </Card>
-            </div>
+            <Button variant="default" className="bg-[#C10000] hover:bg-[#A00000]">
+              Create New Project
+            </Button>
           </div>
 
-          {/* Milestones Overview */}
-          <div className="bg-[#111111] rounded-xl border border-white/10 overflow-hidden">
-            <div className="p-6">
-              <h2 className="text-xl font-semibold text-white mb-4">
-                Milestones Status
-              </h2>
-              <div className="space-y-4">
-                {projectData?.milestones.map((milestone) => (
-                  <div key={milestone.id} className="flex items-center justify-between p-4 bg-black/20 rounded-lg">
-                    <span className="text-white">{milestone.name}</span>
-                    <span className={`px-3 py-1 rounded-full text-sm ${
-                      milestone.status === "unlocked" ? "bg-green-500/20 text-green-400" :
-                      milestone.status === "pending_approval" ? "bg-yellow-500/20 text-yellow-400" :
-                      "bg-white/10 text-white/60"
-                    }`}>
-                      {milestone.status.replace("_", " ").charAt(0).toUpperCase() + milestone.status.slice(1)}
-                    </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {projects?.map((project) => (
+              <Card key={project.id} className="bg-[#111111] border-white/10 overflow-hidden">
+                <div className="relative h-48">
+                  <img
+                    src={project.coverImage}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
+                  <div className="absolute bottom-4 left-4">
+                    <h2 className="text-xl font-bold text-white">{project.title}</h2>
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
+                <div className="p-6 space-y-4">
+                  <p className="text-white/60 line-clamp-2">{project.description}</p>
+
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-white/60">Funding Progress</span>
+                      <span className="text-white">${project.amountRaised.toLocaleString()} / ${project.fundingGoal.toLocaleString()}</span>
+                    </div>
+                    <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-[#C10000] rounded-full transition-all duration-500"
+                        style={{ width: `${(project.amountRaised / project.fundingGoal) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span className={`px-3 py-1 rounded-full text-sm ${
+                      project.status === "funding" ? "bg-blue-500/20 text-blue-400" :
+                        project.status === "in_progress" ? "bg-yellow-500/20 text-yellow-400" :
+                          "bg-green-500/20 text-green-400"
+                    }`}>
+                      {project.status.replace("_", " ").charAt(0).toUpperCase() + project.status.slice(1)}
+                    </span>
+                    <Button asChild>
+                      <Link href={`/artist-dashboard/${project.id}`}>
+                        Manage Project
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
         </motion.div>
       </main>
