@@ -14,25 +14,36 @@ export function ReleasesSection() {
       imageSrc: "/images/artist-banner.png",
       isrc: "OZNB82517697",
       isVerified: true,
+      earnings: "$25,000",
+      label: "Coda Collective",
       href: "/releases/srs"
     },
     {
-      title: "Sheikanes Or - Salo",
-      artist: "Magic Vibes",
+      title: "Midnight in Tokyo",
+      artist: "Neon Drift",
       imageSrc: "/images/srs-1.jpg",
-      isrc: "OZNB82517697"
+      isrc: "OZNB82517698",
+      earnings: "$18,500",
+      label: "Coda Collective",
+      isVerified: true
     },
     {
-      title: "Guacamayo(Dekel Terry Remix)",
-      artist: "Dekel Terry",
+      title: "Desert Storm",
+      artist: "The Sandstorm Collective",
       imageSrc: "/images/srs-2.jpg",
-      isrc: "OZWDW2456750"
+      isrc: "OZWDW2456750",
+      earnings: "$12,300",
+      label: "Coda Collective",
+      isVerified: true
     },
     {
-      title: "PIYUT",
-      artist: "Dekel Terry",
+      title: "Digital Dreams",
+      artist: "Cyber Symphony",
       imageSrc: "/images/srs-3.jpg",
-      isrc: "OZWDW2483327"
+      isrc: "OZWDW2483327",
+      earnings: "$9,800",
+      label: "Coda Collective",
+      isVerified: true
     }
   ];
 
