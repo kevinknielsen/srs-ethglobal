@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import Home from "@/pages/Home";
 import SteelRiverSaintsRelease from "@/pages/releases/srs";
 import Dashboard from "@/pages/Dashboard";
+import ArtistDashboard from "@/pages/artist-dashboard";
 import NotFound from "@/pages/not-found";
 import { Switch, Route } from "wouter";
 import { Providers } from './providers';
@@ -14,6 +15,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/releases/srs" component={SteelRiverSaintsRelease} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/artist-dashboard" component={ArtistDashboard} />
       <Route component={NotFound} />
     </Switch>
   );

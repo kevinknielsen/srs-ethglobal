@@ -1,0 +1,195 @@
+Artist Project Dashboard (/artist-dashboard)
+🔎 Purpose: This page allows artists to track their project's funding status, manage milestones, and request fund releases.
+📌 Tech Stack:
+✅ Frontend: Next.js + TailwindCSS
+✅ Backend: Node.js + Express.js + PostgreSQL
+✅ Auth: Placeholder for Privy (Future Implementation)
+✅ Blockchain: No on-chain integration yet, but structured for Base L2 with OnchainKit (Future Implementation)
+
+🟥 Frontend Implementation
+1️⃣ Page Structure & Components
+Section	Description	Backend API Calls
+Sidebar Navigation	Persistent menu for artists	None (Static UI)
+Project Overview	Displays project funding progress	GET /projects/{id}
+Milestone Tracker	Shows project milestones	GET /projects/{id}/milestones
+Request Milestone Unlock	Artists submit proof to unlock funds	POST /milestones/{id}/submit-proof
+Final Release CTA	Directs to external distributor	GET /projects/{id}/finalize
+2️⃣ Component Breakdown
+🟢 Sidebar Navigation (Left, Fixed)
+✅ Static menu that allows navigation within the artist dashboard
+
+tsx
+Copy
+Edit
+export default function Sidebar() {
+  return (
+    <nav className="w-64 bg-black h-screen flex flex-col p-4">
+      <h2 className="text-white text-lg font-bold mb-6">Artist Dashboard</h2>
+      <ul className="space-y-4">
+        <li><a href="/artist-dashboard" className="text-gray-300 hover:text-white">Project Overview</a></li>
+        <li><a href="/artist-dashboard/milestones" className="text-gray-300 hover:text-white">Milestones</a></li>
+        <li><a href="/artist-dashboard/finalize" className="text-gray-300 hover:text-white">Finalize Release</a></li>
+      </ul>
+    </nav>
+  );
+}
+🟢 Project Overview
+✅ Fetches project details from API & displays funding status
+
+tsx
+Copy
+Edit
+import useSWR from 'swr';
+
+const fetcher = (url: string) => fetch(url).then(res => res.json());
+
+export default function ProjectOverview({ projectId }) {
+  const { data, error } = useSWR(`/api/projects/${projectId}`, fetcher);
+
+  if (error) return <div>Error loading project</div>;
+  if (!data) return <div>Loading...</div>;
+
+  return (
+    <div className="p-6">
+      <h2 className="text-2xl font-bold">{data.title}</h2>
+      <p className="text-gray-400">{data.description}</p>
+      <div className="mt-4">
+        <p>Funding Goal: ${data.funding_goal}</p>
+        <p>Raised: ${data.amount_raised}</p>
+        <progress value={data.amount_raised} max={data.funding_goal} />
+      </div>
+    </div>
+  );
+}
+🟢 Milestone Tracker
+✅ Fetches milestones & allows artists to submit proof
+
+tsx
+Copy
+Edit
+export default function MilestoneTracker({ projectId }) {
+  const { data, error } = useSWR(`/api/projects/${projectId}/milestones`, fetcher);
+
+  const handleSubmitProof = async (milestoneId) => {
+    await fetch(`/api/milestones/${milestoneId}/submit-proof`, { method: 'POST' });
+  };
+
+  if (error) return <div>Error loading milestones</div>;
+  if (!data) return <div>Loading...</div>;
+
+  return (
+    <div className="p-6">
+      <h2 className="text-2xl font-bold">Milestones</h2>
+      {data.map(milestone => (
+        <div key={milestone.id} className="border p-4 my-2">
+          <p className="text-lg">{milestone.name}</p>
+          <p>Status: {milestone.status}</p>
+          {milestone.status === 'pending_approval' && (
+            <button onClick={() => handleSubmitProof(milestone.id)} className="bg-red-500 text-white px-4 py-2">Submit Proof</button>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+🟢 Final Release CTA
+✅ Redirects to Revelator Pro when milestones are complete
+
+tsx
+Copy
+Edit
+export default function FinalizeRelease({ projectId }) {
+  const { data, error } = useSWR(`/api/projects/${projectId}/finalize`, fetcher);
+
+  if (error) return <div>Error loading release details</div>;
+  if (!data) return <div>Loading...</div>;
+
+  return (
+    <div className="p-6">
+      <h2 className="text-2xl font-bold">Finalize Release</h2>
+      {data.status === 'ready' ? (
+        <a href="https://www.revelator.com/pro" target="_blank" className="bg-green-500 text-white px-4 py-2">Distribute via Revelator Pro</a>
+      ) : (
+        <p className="text-gray-400">Complete all milestones before finalizing.</p>
+      )}
+    </div>
+  );
+}
+🟥 Backend Implementation
+📌 Base URL: /api
+📌 Database: PostgreSQL
+📌 Auth: Fake session for now (Will switch to Privy)
+
+1️⃣ Routes & API Handlers
+🟢 Get Project Details
+javascript
+Copy
+Edit
+app.get('/api/projects/:id', async (req, res) => {
+  const project = await db.project.findUnique({
+    where: { id: req.params.id }
+  });
+  res.json(project);
+});
+🟢 Get Milestones
+javascript
+Copy
+Edit
+app.get('/api/projects/:id/milestones', async (req, res) => {
+  const milestones = await db.milestone.findMany({
+    where: { projectId: req.params.id }
+  });
+  res.json(milestones);
+});
+🟢 Submit Milestone Proof
+javascript
+Copy
+Edit
+app.post('/api/milestones/:id/submit-proof', async (req, res) => {
+  await db.milestone.update({
+    where: { id: req.params.id },
+    data: { status: 'pending_approval' }
+  });
+  res.json({ message: 'Proof submitted' });
+});
+🟢 Finalize Release
+javascript
+Copy
+Edit
+app.get('/api/projects/:id/finalize', async (req, res) => {
+  const project = await db.project.findUnique({
+    where: { id: req.params.id }
+  });
+
+  const isComplete = await db.milestone.count({
+    where: { projectId: req.params.id, status: 'unlocked' }
+  }) === 4;
+
+  res.json({ status: isComplete ? 'ready' : 'incomplete' });
+});
+🟥 Database Schema
+✅ Prepares for OnchainKit but runs fully off-chain now
+✅ All milestone proof submissions stored in PostgreSQL (No IPFS)
+
+sql
+Copy
+Edit
+CREATE TABLE projects (
+  id SERIAL PRIMARY KEY,
+  artist_id INT REFERENCES users(id),
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  funding_goal DECIMAL(18,2) NOT NULL,
+  amount_raised DECIMAL(18,2) DEFAULT 0,
+  release_date TIMESTAMP,
+  status VARCHAR(50) CHECK (status IN ('funding', 'in_progress', 'released')),
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE milestones (
+  id SERIAL PRIMARY KEY,
+  project_id INT REFERENCES projects(id),
+  name VARCHAR(255),
+  status VARCHAR(50) CHECK (status IN ('locked', 'pending_approval', 'unlocked')),
+  created_at TIMESTAMP DEFAULT NOW()
+);

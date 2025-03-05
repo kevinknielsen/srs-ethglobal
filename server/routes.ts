@@ -192,6 +192,46 @@ export function registerRoutes(app: Express): Server {
   });
 
 
+  app.get('/api/artist/project', async (req, res) => {
+    try {
+      // Sample project data - will be replaced by database queries
+      const projectData = {
+        id: 1,
+        title: "Steel River Saints",
+        description: "A virtual country artist owned by its fans and managed by artificial intelligence",
+        fundingGoal: 100000,
+        amountRaised: 75000,
+        status: "funding",
+        milestones: [
+          {
+            id: 1,
+            name: "Recording Complete",
+            status: "unlocked"
+          },
+          {
+            id: 2,
+            name: "Marketing Campaign",
+            status: "pending_approval"
+          },
+          {
+            id: 3,
+            name: "Distribution Setup",
+            status: "locked"
+          },
+          {
+            id: 4,
+            name: "Release Event",
+            status: "locked"
+          }
+        ]
+      };
+
+      res.json(projectData);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch project data" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

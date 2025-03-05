@@ -16,7 +16,8 @@ const mockSession = {
   user: {
     name: "Demo User",
     email: "demo@example.com",
-    avatar: "/images/avatar.jpg"
+    avatar: "/images/avatar.jpg",
+    isArtist: true // Added isArtist flag for demo
   }
 };
 
@@ -24,6 +25,7 @@ export function Header() {
   const [location] = useLocation();
 
   const isLoggedIn = mockSession.isLoggedIn;
+  const isArtist = mockSession.user.isArtist;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/95 border-b border-white/10">
@@ -45,9 +47,16 @@ export function Header() {
             </Link>
             <Link href="/dashboard">
               <span className={`text-sm ${location === "/dashboard" ? "text-white" : "text-white/60"} hover:text-white transition-colors`}>
-                Dashboard
+                Fan Dashboard
               </span>
             </Link>
+            {isArtist && (
+              <Link href="/artist-dashboard">
+                <span className={`text-sm ${location === "/artist-dashboard" ? "text-white" : "text-white/60"} hover:text-white transition-colors`}>
+                  Artist Dashboard
+                </span>
+              </Link>
+            )}
           </nav>
 
           {/* Action Buttons / Profile */}
@@ -81,8 +90,13 @@ export function Header() {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href="/dashboard">Dashboard</Link>
+                    <Link href="/dashboard">Fan Dashboard</Link>
                   </DropdownMenuItem>
+                  {isArtist && (
+                    <DropdownMenuItem asChild>
+                      <Link href="/artist-dashboard">Artist Dashboard</Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuItem asChild>
                     <Link href="/settings">Settings</Link>
                   </DropdownMenuItem>
