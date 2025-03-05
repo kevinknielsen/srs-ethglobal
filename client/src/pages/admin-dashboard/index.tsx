@@ -13,6 +13,7 @@ interface ProjectData {
   amountRaised: number;
   status: string;
   coverImage: string;
+  artist: string; // Added artist field
 }
 
 interface Stats {
@@ -53,6 +54,19 @@ export default function AdminDashboard() {
     );
   }
 
+  const getGradientBackground = (projectTitle: string) => {
+    switch (projectTitle) {
+      case "Midnight in Tokyo":
+        return "bg-gradient-to-br from-purple-900 via-blue-900 to-black";
+      case "Desert Storm":
+        return "bg-gradient-to-br from-yellow-700 via-orange-800 to-black";
+      case "Digital Dreams":
+        return "bg-gradient-to-br from-pink-700 via-purple-900 to-black";
+      default: 
+        return "bg-gradient-to-br from-gray-800 via-gray-900 to-black";
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black p-8">
       <motion.div
@@ -66,7 +80,6 @@ export default function AdminDashboard() {
           </h1>
         </div>
 
-        {/* Statistics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <Card className="bg-[#111111] border-white/10 p-6">
             <div className="flex items-start justify-between">
@@ -125,19 +138,15 @@ export default function AdminDashboard() {
           </Card>
         </div>
 
-        {/* Project List */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects?.map((project) => (
             <Card key={project.id} className="bg-[#111111] border-white/10 overflow-hidden">
-              <div className="relative h-48">
-                <img
-                  src={project.coverImage}
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
+              <div className={`relative h-48 ${getGradientBackground(project.title)}`}>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <h2 className="text-2xl font-bold text-white">{project.title}</h2>
+                </div>
                 <div className="absolute bottom-4 left-4">
-                  <h2 className="text-xl font-bold text-white">{project.title}</h2>
+                  <p className="text-lg text-white/80">{project.artist}</p>
                 </div>
               </div>
               <div className="p-6 space-y-4">
