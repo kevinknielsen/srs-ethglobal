@@ -1,6 +1,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import Home from "@/pages/Home";
 import SteelRiverSaintsRelease from "@/pages/releases/srs";
+import Dashboard from "@/pages/Dashboard";
 import NotFound from "@/pages/not-found";
 import { Switch, Route } from "wouter";
 import { Providers } from './providers';
@@ -11,6 +12,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/releases/srs" component={SteelRiverSaintsRelease} />
+      <Route path="/dashboard" component={Dashboard} />
       <Route component={NotFound} />
     </Switch>
   );
