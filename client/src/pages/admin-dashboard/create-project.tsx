@@ -16,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
+import { X } from "lucide-react";
 
 const milestoneSchema = z.object({
   name: z.string().min(1, "Milestone name is required"),
@@ -78,6 +79,14 @@ export default function CreateProject() {
   const addMilestone = () => {
     const milestones = form.getValues("milestones");
     form.setValue("milestones", [...milestones, { name: "", payout: "" }]);
+  };
+
+  const removeMilestone = (index: number) => {
+    const milestones = form.getValues("milestones");
+    if (milestones.length > 1) {
+      const newMilestones = milestones.filter((_, i) => i !== index);
+      form.setValue("milestones", newMilestones);
+    }
   };
 
   const onSubmit = (data: CreateProjectInput) => {
@@ -174,7 +183,7 @@ export default function CreateProject() {
                 </div>
 
                 {form.watch("milestones").map((_, index) => (
-                  <div key={index} className="grid grid-cols-2 gap-4 p-4 bg-black/20 rounded-lg">
+                  <div key={index} className="relative grid grid-cols-2 gap-4 p-4 bg-black/20 rounded-lg">
                     <FormField
                       control={form.control}
                       name={`milestones.${index}.name`}
@@ -206,6 +215,19 @@ export default function CreateProject() {
                         </FormItem>
                       )}
                     />
+
+                    {/* Delete milestone button */}
+                    {form.watch("milestones").length > 1 && (
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        className="absolute -right-2 -top-2 h-6 w-6 rounded-full bg-red-500/10 hover:bg-red-500/20 text-red-500"
+                        onClick={() => removeMilestone(index)}
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    )}
                   </div>
                 ))}
               </div>
