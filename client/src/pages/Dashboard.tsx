@@ -2,32 +2,55 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { SiEthereum } from "react-icons/si";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { useQuery } from "@tanstack/react-query";
+import { Investment, Project } from "@shared/schema";
 
-// Dummy data for development
-const investmentData = {
-  totalInvested: 25000,
-  expectedReturns: 35000,
-  pendingPayouts: 5000,
-  activeInvestments: [
-    {
-      id: 1,
-      projectName: "Steel River Saints",
-      coverImage: "/images/srs-1.jpg",
-      fundingProgress: 75,
-      nextMilestone: "2025-04-01",
-    },
-    {
-      id: 2,
-      projectName: "Digital Dreamers",
-      coverImage: "/images/artist-banner.png",
-      fundingProgress: 45,
-      nextMilestone: "2025-05-15",
-    },
-  ],
-};
+interface DashboardData {
+  totalInvested: number;
+  expectedReturns: number;
+  pendingPayouts: number;
+  activeInvestments: Array<{
+    id: number;
+    projectName: string;
+    coverImage: string;
+    fundingProgress: number;
+    nextMilestone: string;
+  }>;
+}
 
 export default function Dashboard() {
+  const [location] = useLocation();
+
+  const { data: investmentData, isLoading } = useQuery<DashboardData>({
+    queryKey: ['/api/user/investments'],
+    queryFn: async () => {
+      const response = await fetch('/api/user/investments');
+      if (!response.ok) {
+        throw new Error('Failed to fetch investment data');
+      }
+      return response.json();
+    }
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-black">
+        <div className="text-white">Loading your investments...</div>
+      </div>
+    );
+  }
+
+  // Fallback data in case of error or during development
+  const defaultData: DashboardData = {
+    totalInvested: 0,
+    expectedReturns: 0,
+    pendingPayouts: 0,
+    activeInvestments: []
+  };
+
+  const data = investmentData || defaultData;
+
   return (
     <div className="flex min-h-screen bg-black">
       {/* Sidebar */}
@@ -36,30 +59,42 @@ export default function Dashboard() {
           <Button
             variant="ghost"
             size="lg"
-            className="w-full justify-start text-white bg-[#C10000] hover:bg-[#C10000]"
+            className={`w-full justify-start text-white ${
+              location === "/dashboard" ? "bg-[#C10000]" : ""
+            } hover:bg-[#C10000]`}
+            asChild
           >
-            Dashboard
+            <Link href="/dashboard">Dashboard</Link>
           </Button>
           <Button
             variant="ghost"
             size="lg"
-            className="w-full justify-start text-white/60 hover:bg-[#C10000] hover:text-white"
+            className={`w-full justify-start text-white/60 hover:bg-[#C10000] hover:text-white ${
+              location === "/investments" ? "bg-[#C10000] text-white" : ""
+            }`}
+            asChild
           >
-            My Investments
+            <Link href="/investments">My Investments</Link>
           </Button>
           <Button
             variant="ghost"
             size="lg"
-            className="w-full justify-start text-white/60 hover:bg-[#C10000] hover:text-white"
+            className={`w-full justify-start text-white/60 hover:bg-[#C10000] hover:text-white ${
+              location === "/projects" ? "bg-[#C10000] text-white" : ""
+            }`}
+            asChild
           >
-            Browse Projects
+            <Link href="/projects">Browse Projects</Link>
           </Button>
           <Button
             variant="ghost"
             size="lg"
-            className="w-full justify-start text-white/60 hover:bg-[#C10000] hover:text-white"
+            className={`w-full justify-start text-white/60 hover:bg-[#C10000] hover:text-white ${
+              location === "/settings" ? "bg-[#C10000] text-white" : ""
+            }`}
+            asChild
           >
-            Settings
+            <Link href="/settings">Settings</Link>
           </Button>
         </nav>
       </aside>
@@ -83,7 +118,7 @@ export default function Dashboard() {
                   <div>
                     <p className="text-sm text-white/60">Total Invested</p>
                     <p className="text-2xl font-bold text-white mt-1">
-                      ${investmentData.totalInvested.toLocaleString()}
+                      ${data.totalInvested.toLocaleString()}
                     </p>
                   </div>
                   <div className="h-12 w-12 rounded-full bg-[#C10000]/10 flex items-center justify-center">
@@ -97,7 +132,7 @@ export default function Dashboard() {
                   <div>
                     <p className="text-sm text-white/60">Expected Returns</p>
                     <p className="text-2xl font-bold text-white mt-1">
-                      ${investmentData.expectedReturns.toLocaleString()}
+                      ${data.expectedReturns.toLocaleString()}
                     </p>
                   </div>
                   <div className="h-12 w-12 rounded-full bg-[#C10000]/10 flex items-center justify-center">
@@ -123,7 +158,7 @@ export default function Dashboard() {
                   <div>
                     <p className="text-sm text-white/60">Pending Payouts</p>
                     <p className="text-2xl font-bold text-white mt-1">
-                      ${investmentData.pendingPayouts.toLocaleString()}
+                      ${data.pendingPayouts.toLocaleString()}
                     </p>
                   </div>
                   <div className="h-12 w-12 rounded-full bg-[#C10000]/10 flex items-center justify-center">
@@ -170,7 +205,7 @@ export default function Dashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {investmentData.activeInvestments.map((investment) => (
+                  {data.activeInvestments.map((investment) => (
                     <tr
                       key={investment.id}
                       className="border-b border-white/10 hover:bg-white/5"
