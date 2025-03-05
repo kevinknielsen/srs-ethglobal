@@ -49,20 +49,20 @@ export function Header() {
             </Link>
             <Link href="/dashboard">
               <span className={`text-sm ${location === "/dashboard" ? "text-white" : "text-white/60"} hover:text-white transition-colors`}>
-                Fan Dashboard
+                Fans
               </span>
             </Link>
             {isArtist && (
               <Link href="/artist-dashboard">
                 <span className={`text-sm ${location === "/artist-dashboard" ? "text-white" : "text-white/60"} hover:text-white transition-colors`}>
-                  Artist Dashboard
+                  Artists
                 </span>
               </Link>
             )}
             {isAdmin && (
               <Link href="/admin-dashboard">
                 <span className={`text-sm ${location === "/admin-dashboard" ? "text-white" : "text-white/60"} hover:text-white transition-colors`}>
-                  Admin Dashboard
+                  Admin
                 </span>
               </Link>
             )}
@@ -99,16 +99,16 @@ export function Header() {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href="/dashboard">Fan Dashboard</Link>
+                    <Link href="/dashboard">Fans</Link>
                   </DropdownMenuItem>
                   {isArtist && (
                     <DropdownMenuItem asChild>
-                      <Link href="/artist-dashboard">Artist Dashboard</Link>
+                      <Link href="/artist-dashboard">Artists</Link>
                     </DropdownMenuItem>
                   )}
                   {isAdmin && (
                     <DropdownMenuItem asChild>
-                      <Link href="/admin-dashboard">Admin Dashboard</Link>
+                      <Link href="/admin-dashboard">Admin</Link>
                     </DropdownMenuItem>
                   )}
                   <DropdownMenuItem asChild>
