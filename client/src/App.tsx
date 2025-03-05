@@ -5,6 +5,8 @@ import SteelRiverSaintsRelease from "@/pages/releases/srs";
 import Dashboard from "@/pages/Dashboard";
 import ArtistDashboard from "@/pages/artist-dashboard";
 import ProjectDashboard from "@/pages/artist-dashboard/[projectId]";
+import ProjectMilestones from "@/pages/artist-dashboard/[projectId]/milestones";
+import FinalizeRelease from "@/pages/artist-dashboard/[projectId]/finalize";
 import NotFound from "@/pages/not-found";
 import { Switch, Route } from "wouter";
 import { Providers } from './providers';
@@ -18,6 +20,8 @@ function Router() {
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/artist-dashboard" component={ArtistDashboard} />
       <Route path="/artist-dashboard/:projectId" component={ProjectDashboard} />
+      <Route path="/artist-dashboard/:projectId/milestones" component={ProjectMilestones} />
+      <Route path="/artist-dashboard/:projectId/finalize" component={FinalizeRelease} />
       <Route component={NotFound} />
     </Switch>
   );
