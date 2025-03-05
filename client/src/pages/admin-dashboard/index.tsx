@@ -64,6 +64,14 @@ export default function AdminDashboard() {
           <h1 className="text-3xl font-bold text-white">
             Admin Dashboard
           </h1>
+          <Button
+            asChild
+            className="bg-[#C10000] hover:bg-[#A00000]"
+          >
+            <Link href="/admin-dashboard/create-project">
+              Create New Project
+            </Link>
+          </Button>
         </div>
 
         {/* Statistics */}

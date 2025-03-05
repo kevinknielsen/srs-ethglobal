@@ -162,6 +162,38 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
+  // Add after admin stats route
+  app.post('/api/admin/projects', async (req, res) => {
+    try {
+      const { artist, title, description, fundingGoal, milestones } = req.body;
+
+      // Generate a new project ID
+      const newProjectId = projectsData.length + 1;
+
+      // Create the new project
+      const newProject = {
+        id: newProjectId,
+        title,
+        artist,
+        description,
+        fundingGoal: parseFloat(fundingGoal),
+        amountRaised: 0,
+        status: "funding",
+        coverImage: "/images/default-project.jpg", // You might want to handle image upload separately
+        isrc: `02N${Math.random().toString(36).substr(2, 8).toUpperCase()}`, // Generate a random ISRC for demo
+        earnings: 0
+      };
+
+      // Add the new project to our data
+      projectsData.push(newProject);
+
+      res.json({ message: 'Project created successfully', project: newProject });
+    } catch (error) {
+      console.error('Failed to create project:', error);
+      res.status(500).json({ message: "Failed to create project" });
+    }
+  });
+
   // Stats route
   app.get('/api/stats', async (req, res) => {
     try {
