@@ -126,6 +126,70 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
+  // Specific release route
+  app.get('/api/releases/:id', async (req, res) => {
+    try {
+      // Sample detailed release data for Steel River Saints
+      const release = {
+        id: 1,
+        title: "Steel River Saints",
+        tagline: "The Future of Country Music",
+        description: "A virtual country artist owned by its fans and managed by artificial intelligence",
+        coverImage: "/images/srs-1.jpg",
+        fundingProgress: 75,
+        fundingGoal: 100000,
+        amountRaised: 75000,
+        releaseDate: "2025-03-01T00:00:00.000Z",
+        status: "active",
+        tracks: [
+          {
+            id: 1,
+            title: "The Bottle",
+            duration: "3:45",
+            previewUrl: "/audio/srs-preview-1.mp3",
+            isPreview: true
+          },
+          {
+            id: 2,
+            title: "Neon Dreams",
+            duration: "4:12",
+            previewUrl: "/audio/srs-preview-2.mp3",
+            isPreview: true
+          }
+        ],
+        milestones: [
+          {
+            id: 1,
+            name: "Recording Complete",
+            status: "completed",
+            date: "2024-12-15T00:00:00.000Z"
+          },
+          {
+            id: 2,
+            name: "Marketing Campaign",
+            status: "in_progress",
+            date: "2025-01-15T00:00:00.000Z"
+          },
+          {
+            id: 3,
+            name: "Official Release",
+            status: "upcoming",
+            date: "2025-03-01T00:00:00.000Z"
+          }
+        ],
+        revenueSharing: {
+          fans: 70,
+          platform: 10,
+          artist: 20
+        }
+      };
+
+      res.json(release);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch release details" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
