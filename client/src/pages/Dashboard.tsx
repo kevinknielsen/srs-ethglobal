@@ -245,7 +245,7 @@ export default function Dashboard() {
                         </span>
                       </td>
                       <td className="p-4 text-right">
-                        <Link href={`/investments/${investment.id}`}>
+                        <Link href={`/releases/srs`}>
                           <Button
                             variant="outline"
                             size="sm"
