@@ -7,11 +7,12 @@ const tabs = ["Top Movers", "Top Earning", "What's new"] as const;
 export function ReleasesSection() {
   const [activeTab, setActiveTab] = useState<typeof tabs[number]>("What's new");
 
+  // This data will eventually come from the admin dashboard
   const releases = [
     {
       title: "The Bottle",
       artist: "Steel River Saints",
-      imageSrc: "/images/srs-banner.jpg",
+      imageSrc: "/images/artist-banner.png",
       isrc: "OZNB82517697",
       isVerified: true,
       earnings: "$25,000",

@@ -63,13 +63,14 @@ export function registerRoutes(app: Express): Server {
   // Project routes
   app.get('/api/projects', async (req, res) => {
     try {
-      // For demo purposes, returning Steel River Saints as sample data
+      // For demo purposes, returning sample projects
+      // In future, this will be fetched from database based on admin dashboard input
       const sampleProjects = [
         {
           id: 1,
           title: "Steel River Saints",
           description: "A virtual country artist owned by its fans and managed by artificial intelligence",
-          coverImage: "/images/srs-1.jpg",
+          coverImage: "/images/artist-banner.png",
           fundingProgress: 75,
           fundingGoal: 100000,
           amountRaised: 75000,
@@ -84,37 +85,15 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
-  // Stats route
-  app.get('/api/stats', async (req, res) => {
-    try {
-      // Sample statistics data
-      const stats = {
-        totalInvestors: 1500,
-        totalInvested: 2500000,
-        averageReturn: 40,
-        projectCount: 25,
-        monthlyData: [
-          { month: 'Jan', invested: 150000 },
-          { month: 'Feb', invested: 200000 },
-          { month: 'Mar', invested: 300000 }
-        ]
-      };
-
-      res.json(stats);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch statistics" });
-    }
-  });
-
   // Latest releases route
   app.get('/api/releases/latest', async (req, res) => {
     try {
-      // Sample latest release data using Steel River Saints
+      // Sample latest release data - will be replaced by admin dashboard data
       const latestRelease = {
         id: 1,
         title: "Steel River Saints",
         description: "A virtual country artist owned by its fans and managed by artificial intelligence",
-        coverImage: "/images/srs-1.jpg",
+        coverImage: "/images/artist-banner.png",
         fundingProgress: 75,
         fundingGoal: 100000,
         releaseDate: "2025-03-01T00:00:00.000Z"
@@ -129,13 +108,13 @@ export function registerRoutes(app: Express): Server {
   // Specific release route
   app.get('/api/releases/:id', async (req, res) => {
     try {
-      // Sample detailed release data for Steel River Saints
+      // Sample detailed release data - will be replaced by admin dashboard data
       const release = {
         id: 1,
         title: "Steel River Saints",
         tagline: "The Future of Country Music",
         description: "A virtual country artist owned by its fans and managed by artificial intelligence",
-        coverImage: "/images/srs-1.jpg",
+        coverImage: "/images/artist-banner.png",
         fundingProgress: 75,
         fundingGoal: 100000,
         amountRaised: 75000,
@@ -189,6 +168,29 @@ export function registerRoutes(app: Express): Server {
       res.status(500).json({ message: "Failed to fetch release details" });
     }
   });
+
+  // Stats route
+  app.get('/api/stats', async (req, res) => {
+    try {
+      // Sample statistics data
+      const stats = {
+        totalInvestors: 1500,
+        totalInvested: 2500000,
+        averageReturn: 40,
+        projectCount: 25,
+        monthlyData: [
+          { month: 'Jan', invested: 150000 },
+          { month: 'Feb', invested: 200000 },
+          { month: 'Mar', invested: 300000 }
+        ]
+      };
+
+      res.json(stats);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch statistics" });
+    }
+  });
+
 
   const httpServer = createServer(app);
   return httpServer;
