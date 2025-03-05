@@ -48,11 +48,6 @@ export function Header() {
                 Dashboard
               </span>
             </Link>
-            <Link href="/investments">
-              <span className={`text-sm ${location === "/investments" ? "text-white" : "text-white/60"} hover:text-white transition-colors`}>
-                My Investments
-              </span>
-            </Link>
           </nav>
 
           {/* Action Buttons / Profile */}

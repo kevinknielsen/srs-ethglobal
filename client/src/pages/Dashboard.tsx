@@ -70,16 +70,6 @@ export default function Dashboard() {
             variant="ghost"
             size="lg"
             className={`w-full justify-start text-white/60 hover:bg-[#C10000] hover:text-white ${
-              location === "/investments" ? "bg-[#C10000] text-white" : ""
-            }`}
-            asChild
-          >
-            <Link href="/investments">My Investments</Link>
-          </Button>
-          <Button
-            variant="ghost"
-            size="lg"
-            className={`w-full justify-start text-white/60 hover:bg-[#C10000] hover:text-white ${
               location === "/" ? "bg-[#C10000] text-white" : ""
             }`}
             asChild
