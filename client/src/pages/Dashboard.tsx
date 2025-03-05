@@ -36,7 +36,7 @@ export default function Dashboard() {
           <Button
             variant="ghost"
             size="lg"
-            className="w-full justify-start text-white bg-[#C10000] hover:bg-[#C10000]/90"
+            className="w-full justify-start text-white bg-[#C10000] hover:bg-[#C10000]"
           >
             Dashboard
           </Button>
