@@ -36,7 +36,7 @@ export default function Dashboard() {
           <Button
             variant="ghost"
             size="lg"
-            className="w-full justify-start text-white hover:bg-[#C10000] hover:text-white"
+            className="w-full justify-start text-white bg-[#C10000] hover:bg-[#C10000]/90"
           >
             Dashboard
           </Button>
@@ -100,9 +100,9 @@ export default function Dashboard() {
                       ${investmentData.expectedReturns.toLocaleString()}
                     </p>
                   </div>
-                  <div className="h-12 w-12 rounded-full bg-green-500/10 flex items-center justify-center">
+                  <div className="h-12 w-12 rounded-full bg-[#C10000]/10 flex items-center justify-center">
                     <svg
-                      className="h-6 w-6 text-green-500"
+                      className="h-6 w-6 text-[#C10000]"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -126,9 +126,9 @@ export default function Dashboard() {
                       ${investmentData.pendingPayouts.toLocaleString()}
                     </p>
                   </div>
-                  <div className="h-12 w-12 rounded-full bg-blue-500/10 flex items-center justify-center">
+                  <div className="h-12 w-12 rounded-full bg-[#C10000]/10 flex items-center justify-center">
                     <svg
-                      className="h-6 w-6 text-blue-500"
+                      className="h-6 w-6 text-[#C10000]"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -214,7 +214,7 @@ export default function Dashboard() {
                           <Button
                             variant="outline"
                             size="sm"
-                            className="border-white/20 text-white hover:bg-[#C10000] hover:text-white hover:border-transparent"
+                            className="border-white/20 text-white hover:bg-[#C10000] hover:text-white hover:border-[#C10000]"
                           >
                             View Details
                           </Button>
