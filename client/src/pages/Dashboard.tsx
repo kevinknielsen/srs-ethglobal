@@ -80,11 +80,11 @@ export default function Dashboard() {
             variant="ghost"
             size="lg"
             className={`w-full justify-start text-white/60 hover:bg-[#C10000] hover:text-white ${
-              location === "/projects" ? "bg-[#C10000] text-white" : ""
+              location === "/" ? "bg-[#C10000] text-white" : ""
             }`}
             asChild
           >
-            <Link href="/projects">Browse Projects</Link>
+            <Link href="/">Browse Projects</Link>
           </Button>
           <Button
             variant="ghost"
