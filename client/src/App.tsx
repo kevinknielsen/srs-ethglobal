@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/toaster";
+import { Header } from "@/components/Header";
 import Home from "@/pages/Home";
 import SteelRiverSaintsRelease from "@/pages/releases/srs";
 import Dashboard from "@/pages/Dashboard";
@@ -22,7 +23,11 @@ function App() {
   return (
     <Providers>
       <div className="min-h-screen bg-black text-white">
-        <Router />
+        <Header />
+        {/* Add pt-16 to account for fixed header height */}
+        <div className="pt-16">
+          <Router />
+        </div>
         <Toaster />
       </div>
     </Providers>
