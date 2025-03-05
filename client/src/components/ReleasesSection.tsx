@@ -11,7 +11,7 @@ export function ReleasesSection() {
     {
       title: "The Bottle",
       artist: "Steel River Saints",
-      imageSrc: "/images/artist-banner.png",
+      imageSrc: "/images/srs-banner.jpg",
       isrc: "OZNB82517697",
       isVerified: true,
       earnings: "$25,000",
@@ -21,7 +21,7 @@ export function ReleasesSection() {
     {
       title: "Midnight in Tokyo",
       artist: "Neon Drift",
-      imageSrc: "/images/srs-1.jpg",
+      imageSrc: "/images/neon-drift.jpg", 
       isrc: "OZNB82517698",
       earnings: "$18,500",
       label: "Coda Collective",
@@ -30,7 +30,7 @@ export function ReleasesSection() {
     {
       title: "Desert Storm",
       artist: "The Sandstorm Collective",
-      imageSrc: "/images/srs-2.jpg",
+      imageSrc: "/images/sandstorm.jpg", 
       isrc: "OZWDW2456750",
       earnings: "$12,300",
       label: "Coda Collective",
@@ -39,7 +39,7 @@ export function ReleasesSection() {
     {
       title: "Digital Dreams",
       artist: "Cyber Symphony",
-      imageSrc: "/images/srs-3.jpg",
+      imageSrc: "/images/cyber-symphony.jpg", 
       isrc: "OZWDW2483327",
       earnings: "$9,800",
       label: "Coda Collective",
