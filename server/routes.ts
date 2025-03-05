@@ -60,7 +60,7 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
-  // Project routes
+  // Projects route for everyone
   app.get('/api/projects', async (req, res) => {
     try {
       // For demo purposes, returning sample projects
@@ -81,6 +81,64 @@ export function registerRoutes(app: Express): Server {
 
       res.json(sampleProjects);
     } catch (error) {
+      res.status(500).json({ message: "Failed to fetch projects" });
+    }
+  });
+
+  app.get('/api/user/projects', async (req, res) => {
+    try {
+      // Sample projects data - will be replaced by database queries
+      const projects = [
+        {
+          id: 1,
+          title: "Steel River Saints",
+          description: "A virtual country artist owned by its fans and managed by artificial intelligence",
+          fundingGoal: 100000,
+          amountRaised: 75000,
+          status: "funding",
+          coverImage: "/images/artist-banner.png"
+        },
+        {
+          id: 2,
+          title: "Neon Drift",
+          description: "Electronic music producer pushing the boundaries of synthwave",
+          fundingGoal: 80000,
+          amountRaised: 45000,
+          status: "in_progress",
+          coverImage: "/images/neon-drift.jpg"
+        },
+        {
+          id: 3,
+          title: "Desert Storm",
+          description: "Middle Eastern-influenced electronic music collective",
+          fundingGoal: 60000,
+          amountRaised: 30000,
+          status: "funding",
+          coverImage: "/images/sandstorm.jpg"
+        },
+        {
+          id: 4,
+          title: "Cosmic Harmony",
+          description: "Space-themed orchestral compositions with electronic elements",
+          fundingGoal: 120000,
+          amountRaised: 90000,
+          status: "ready_for_release",
+          coverImage: "/images/cosmic-harmony.jpg"
+        },
+        {
+          id: 5,
+          title: "Urban Pulse",
+          description: "Hip-hop collective exploring urban culture through music",
+          fundingGoal: 75000,
+          amountRaised: 25000,
+          status: "funding",
+          coverImage: "/images/urban-pulse.jpg"
+        }
+      ];
+
+      res.json(projects);
+    } catch (error) {
+      console.error('Failed to fetch projects:', error);
       res.status(500).json({ message: "Failed to fetch projects" });
     }
   });
@@ -196,11 +254,11 @@ export function registerRoutes(app: Express): Server {
 
       // Calculate real statistics from project data
       const stats = {
-        totalInvestors: projects.reduce((acc, project) => {
-          // Assuming each project has roughly 50 investors for demo
+        totalInvestors: projects.reduce((acc: number, project: any) => {
+          // Calculate based on average investment of $1500 per investor
           return acc + Math.floor(project.amountRaised / 1500);
         }, 0),
-        totalInvested: projects.reduce((acc, project) => acc + project.amountRaised, 0),
+        totalInvested: projects.reduce((acc: number, project: any) => acc + project.amountRaised, 0),
         averageReturn: 15, // Set to realistic music industry average
         projectCount: projects.length
       };
@@ -271,46 +329,6 @@ export function registerRoutes(app: Express): Server {
       res.json(projectData);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch project data" });
-    }
-  });
-
-  app.get('/api/user/projects', async (req, res) => {
-    try {
-      // Sample projects data - will be replaced by database queries
-      const projects = [
-        {
-          id: 1,
-          title: "Steel River Saints",
-          description: "A virtual country artist owned by its fans and managed by artificial intelligence",
-          fundingGoal: 100000,
-          amountRaised: 75000,
-          status: "funding",
-          coverImage: "/images/artist-banner.png"
-        },
-        {
-          id: 2,
-          title: "Neon Drift",
-          description: "Electronic music producer pushing the boundaries of synthwave",
-          fundingGoal: 80000,
-          amountRaised: 45000,
-          status: "in_progress",
-          coverImage: "/images/neon-drift.jpg"
-        },
-        {
-          id: 3,
-          title: "Desert Storm",
-          description: "Middle Eastern-influenced electronic music collective",
-          fundingGoal: 60000,
-          amountRaised: 30000,
-          status: "funding",
-          coverImage: "/images/sandstorm.jpg"
-        }
-      ];
-
-      res.json(projects);
-    } catch (error) {
-      console.error('Failed to fetch projects:', error);
-      res.status(500).json({ message: "Failed to fetch projects" });
     }
   });
 
