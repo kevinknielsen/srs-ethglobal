@@ -7,6 +7,10 @@ import ArtistDashboard from "@/pages/artist-dashboard";
 import ProjectDashboard from "@/pages/artist-dashboard/[projectId]";
 import ProjectMilestones from "@/pages/artist-dashboard/[projectId]/milestones";
 import FinalizeRelease from "@/pages/artist-dashboard/[projectId]/finalize";
+import AdminDashboard from "@/pages/admin-dashboard";
+import AdminProjectDashboard from "@/pages/admin-dashboard/[projectId]";
+import AdminMilestones from "@/pages/admin-dashboard/[projectId]/milestones";
+import AdminFundDistribution from "@/pages/admin-dashboard/[projectId]/fund-distribution";
 import NotFound from "@/pages/not-found";
 import { Switch, Route } from "wouter";
 import { Providers } from './providers';
@@ -22,6 +26,10 @@ function Router() {
       <Route path="/artist-dashboard/:projectId" component={ProjectDashboard} />
       <Route path="/artist-dashboard/:projectId/milestones" component={ProjectMilestones} />
       <Route path="/artist-dashboard/:projectId/finalize" component={FinalizeRelease} />
+      <Route path="/admin-dashboard" component={AdminDashboard} />
+      <Route path="/admin-dashboard/:projectId" component={AdminProjectDashboard} />
+      <Route path="/admin-dashboard/:projectId/milestones" component={AdminMilestones} />
+      <Route path="/admin-dashboard/:projectId/fund-distribution" component={AdminFundDistribution} />
       <Route component={NotFound} />
     </Switch>
   );

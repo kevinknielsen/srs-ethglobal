@@ -17,7 +17,8 @@ const mockSession = {
     name: "Demo User",
     email: "demo@example.com",
     avatar: "/images/avatar.jpg",
-    isArtist: true // Added isArtist flag for demo
+    isArtist: true, // Added isArtist flag for demo
+    isAdmin: true // Added isAdmin flag for demo
   }
 };
 
@@ -26,6 +27,7 @@ export function Header() {
 
   const isLoggedIn = mockSession.isLoggedIn;
   const isArtist = mockSession.user.isArtist;
+  const isAdmin = mockSession.user.isAdmin;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/95 border-b border-white/10">
@@ -54,6 +56,13 @@ export function Header() {
               <Link href="/artist-dashboard">
                 <span className={`text-sm ${location === "/artist-dashboard" ? "text-white" : "text-white/60"} hover:text-white transition-colors`}>
                   Artist Dashboard
+                </span>
+              </Link>
+            )}
+            {isAdmin && (
+              <Link href="/admin-dashboard">
+                <span className={`text-sm ${location === "/admin-dashboard" ? "text-white" : "text-white/60"} hover:text-white transition-colors`}>
+                  Admin Dashboard
                 </span>
               </Link>
             )}
@@ -95,6 +104,11 @@ export function Header() {
                   {isArtist && (
                     <DropdownMenuItem asChild>
                       <Link href="/artist-dashboard">Artist Dashboard</Link>
+                    </DropdownMenuItem>
+                  )}
+                  {isAdmin && (
+                    <DropdownMenuItem asChild>
+                      <Link href="/admin-dashboard">Admin Dashboard</Link>
                     </DropdownMenuItem>
                   )}
                   <DropdownMenuItem asChild>

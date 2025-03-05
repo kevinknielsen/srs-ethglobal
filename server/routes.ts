@@ -169,6 +169,62 @@ export function registerRoutes(app: Express): Server {
     }
   });
 
+  // Admin routes
+  app.get('/api/admin/projects', async (req, res) => {
+    try {
+      // Sample projects data - will be replaced by database queries
+      const projects = [
+        {
+          id: 1,
+          title: "Steel River Saints",
+          description: "A virtual country artist owned by its fans and managed by artificial intelligence",
+          fundingGoal: 100000,
+          amountRaised: 75000,
+          status: "funding",
+          coverImage: "/images/artist-banner.png"
+        },
+        {
+          id: 2,
+          title: "Neon Drift",
+          description: "Electronic music producer pushing the boundaries of synthwave",
+          fundingGoal: 80000,
+          amountRaised: 45000,
+          status: "in_progress",
+          coverImage: "/images/neon-drift.jpg"
+        },
+        {
+          id: 3,
+          title: "Desert Storm",
+          description: "Middle Eastern-influenced electronic music collective",
+          fundingGoal: 60000,
+          amountRaised: 30000,
+          status: "ready_for_release",
+          coverImage: "/images/sandstorm.jpg"
+        }
+      ];
+
+      res.json(projects);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch projects" });
+    }
+  });
+
+  app.get('/api/admin/stats', async (req, res) => {
+    try {
+      // Sample statistics data - will be replaced by database queries
+      const stats = {
+        totalInvestors: 1500,
+        totalInvested: 2500000,
+        averageReturn: 40,
+        projectCount: 25
+      };
+
+      res.json(stats);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch statistics" });
+    }
+  });
+
   // Stats route
   app.get('/api/stats', async (req, res) => {
     try {
