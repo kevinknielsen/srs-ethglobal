@@ -14,7 +14,7 @@ const projectsData = [
     fundingGoal: 100000,
     amountRaised: 75000,
     status: "funding",
-    coverImage: "/images/the-bottle.jpg",  // Update image path
+    coverImage: "/images/artist-banner.png",
     isrc: "02NBB2517697",
     earnings: 25000
   },
@@ -26,7 +26,7 @@ const projectsData = [
     fundingGoal: 80000,
     amountRaised: 45000,
     status: "in_progress",
-    coverImage: "/images/midnight-in-tokyo.jpg",  // Update image path
+    coverImage: "/images/neon-drift.jpg",
     isrc: "0ZNBB2517698",
     earnings: 18500
   },
@@ -38,7 +38,7 @@ const projectsData = [
     fundingGoal: 60000,
     amountRaised: 30000,
     status: "funding",
-    coverImage: "/images/desert-storm.jpg",  // Update image path
+    coverImage: "/images/desert-storm.jpg",
     isrc: "02N0W245G750",
     earnings: 12300
   },
@@ -50,7 +50,7 @@ const projectsData = [
     fundingGoal: 75000,
     amountRaised: 25000,
     status: "funding",
-    coverImage: "/images/digital-dreams.jpg",  // Update image path
+    coverImage: "/images/digital-dreams.jpg",
     isrc: "02N0W248332Z",
     earnings: 9800
   }
@@ -352,6 +352,7 @@ export function registerRoutes(app: Express): Server {
       res.status(500).json({ message: "Failed to fetch release details" });
     }
   });
+
 
   const httpServer = createServer(app);
   return httpServer;
