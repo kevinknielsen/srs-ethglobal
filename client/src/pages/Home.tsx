@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
 import { Link } from "wouter";
 import { StatsGraph } from "@/components/StatsGraph";
 import { ReleasesSection } from "@/components/ReleasesSection";
+import { Header } from "@/components/Header";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-black">
-      <Navbar />
+      <Header />
 
       <motion.main 
         initial={{ opacity: 0, y: 20 }}

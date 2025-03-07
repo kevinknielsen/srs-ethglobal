@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
 import { PurchaseButton } from "@/components/PurchaseButton";
 import ChatInterface from "@/components/ChatInterface";
 import AudioCard from "@/components/AudioCard";
 import { ArtistBioModal } from "@/components/ArtistBioModal";
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Header } from "@/components/Header";
 
 interface ReleaseData {
   id: number;
@@ -100,7 +100,7 @@ export default function SteelRiverSaintsRelease() {
 
   return (
     <div className="min-h-screen bg-black">
-      <Navbar />
+      <Header />
 
       <motion.main 
         initial={{ opacity: 0, y: 20 }}
