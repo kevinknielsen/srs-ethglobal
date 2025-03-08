@@ -88,15 +88,15 @@ export default function About() {
             <h2 className="text-3xl font-bold text-white text-center">Frequently Asked Questions</h2>
             <div className="space-y-6">
               <div className="bg-white/5 p-6 rounded-xl">
-                <h3 className="text-xl font-semibold text-white mb-2">How does Coda differ from traditional labels?</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">How does Superfan One differ from traditional labels?</h3>
                 <p className="text-white/70">
-                  Unlike traditional labels that own artists' catalogs, Coda is a financial backbone, not a gatekeeper. Artists keep 100% of their master rights, while Coda earns revenue from transaction fees, DeFi lending spreads, and SaaS partnerships.
+                  Unlike traditional labels that own artists' catalogs, Superfan One is a financial backbone, not a gatekeeper. Artists keep 100% of their master rights, while Superfan One earns revenue from transaction fees, DeFi lending spreads, and SaaS partnerships.
                 </p>
               </div>
               <div className="bg-white/5 p-6 rounded-xl">
-                <h3 className="text-xl font-semibold text-white mb-2">What services does Coda provide?</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">What services does Superfan One provide?</h3>
                 <p className="text-white/70">
-                  Coda provides crowdfunding through Royalty Token Futures, real-time liquidity through DeFi credit lines, and access to a curated marketplace for marketing, PR, playlisting, and touring services.
+                  Superfan One provides crowdfunding through Royalty Token Futures, real-time liquidity through DeFi credit lines, and access to a curated marketplace for marketing, PR, playlisting, and touring services.
                 </p>
               </div>
               <div className="bg-white/5 p-6 rounded-xl">

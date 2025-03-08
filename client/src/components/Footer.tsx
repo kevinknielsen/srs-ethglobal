@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white">Coda Collective</h3>
+            <h3 className="text-xl font-bold text-white">Superfan One</h3>
             <p className="text-sm text-white/60">
               The future of artist-owned music finance—a decentralized, transparent, and scalable model.
             </p>
@@ -86,7 +86,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-white/10">
           <p className="text-sm text-white/60 text-center">
-            © {new Date().getFullYear()} Coda Collective. All rights reserved.
+            © {new Date().getFullYear()} Superfan One. All rights reserved.
           </p>
         </div>
       </div>

@@ -44,7 +44,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/">
             <div className="text-xl font-bold text-white cursor-pointer">
-              Coda Collective
+              Superfan One
             </div>
           </Link>
 
@@ -153,8 +153,8 @@ export function Header() {
           {/* Action Buttons / Profile */}
           <div className="flex items-center space-x-4">
             {!isLoggedIn ? (
-              <Button 
-                variant="default" 
+              <Button
+                variant="default"
                 className="bg-[#8B0000] hover:bg-[#A00000] text-white"
                 asChild
               >
