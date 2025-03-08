@@ -1,0 +1,154 @@
+Artist Dashboard (/artist-dashboard)
+🔎 Purpose:
+✅ Shows a list of projects the artist owns
+✅ Allows navigation into specific project dashboards
+✅ Manages different funding and milestone progress for each project
+
+🟢 UI Changes – New Project Selector
+1️⃣ Artist Dashboard Homepage (/artist-dashboard)
+📌 Instead of loading a single project, the dashboard should list all projects owned by the artist, allowing selection.
+
+🛠️ What It Should Show
+Welcome Message: “Welcome back, [Artist Name]”
+Project List (Selectable)
+Each project card includes:
+🎵 Project Name
+📊 Funding Status ($X of $Y Raised)
+🏷️ Status (Funding, In Progress, Ready for Release)
+🔗 [Manage] Button (Takes user to /artist-dashboard/[projectId])
+If no projects:
+"You don’t have any projects yet! Click here to create one."
+🛠️ API Calls
+GET /user/projects → Fetch all projects for logged-in artist.
+🟥 Project-Specific Dashboard (/artist-dashboard/[projectId])
+Once a project is selected, the dashboard changes to manage that specific project. The sidebar links must update dynamically to reflect the selected project.
+
+2️⃣ Sidebar Navigation (Updated)
+Instead of static links, we dynamically generate links based on the selected project.
+
+🔹 Dynamic Sidebar
+tsx
+Copy
+Edit
+import Link from 'next/link';
+
+export default function Sidebar({ projectId }) {
+  return (
+    <nav className="w-64 bg-black h-screen flex flex-col p-4">
+      <h2 className="text-white text-lg font-bold mb-6">Artist Dashboard</h2>
+      <Link href={`/artist-dashboard/${projectId}`}>
+        <button className="bg-red-500 text-white px-4 py-2 w-full text-left">Project Overview</button>
+      </Link>
+      <Link href={`/artist-dashboard/${projectId}/milestones`}>
+        <button className="text-gray-300 hover:text-white px-4 py-2 w-full text-left">Milestones</button>
+      </Link>
+      <Link href={`/artist-dashboard/${projectId}/finalize`}>
+        <button className="text-gray-300 hover:text-white px-4 py-2 w-full text-left">Finalize Release</button>
+      </Link>
+    </nav>
+  );
+}
+✅ Sidebar now updates links dynamically based on projectId
+
+🟥 Updated Page Structures for Multiple Projects
+1️⃣ Project Overview (/artist-dashboard/[projectId])
+✅ Shows high-level project details
+✅ Includes a dropdown to switch between projects
+
+🛠️ What It Should Show
+Dropdown: Select another project to manage (onChange → navigate to /artist-dashboard/[newProjectId])
+Project Stats:
+Funding Progress (Raised: $X of $Y)
+Current Status (Funding, In Progress, Ready for Release)
+CTA to Start Milestones
+🛠️ API Calls
+GET /projects/{projectId} → Fetch selected project details.
+2️⃣ Milestones (/artist-dashboard/[projectId]/milestones)
+✅ Shows milestones for the selected project
+✅ Handles proof submission separately for each project
+
+🛠️ What It Should Show
+Dynamic milestone progress for the project
+Only show milestones for the current projectId
+Proof submission buttons (enabled only for Pending Approval milestones)
+🛠️ API Calls
+GET /projects/{projectId}/milestones
+POST /milestones/{milestoneId}/submit-proof
+3️⃣ Finalize Release (/artist-dashboard/[projectId]/finalize)
+✅ Ensures all milestones for the selected project are complete
+✅ Unlocks distribution button when project is ready
+
+🛠️ What It Should Show
+Check if all milestones for projectId are complete
+If ready: "Your project is ready for distribution!"
+✅ Button: [Distribute via Revelator Pro]
+If not ready: ❌ "Complete all milestones before finalizing"
+🛠️ API Calls
+GET /projects/{projectId}/finalize
+🟥 Backend Updates for Multiple Projects
+1️⃣ Database Changes (Already Supports Multiple Projects)
+📌 Each artist can have multiple projects, each with its own milestones.
+📌 No schema changes needed, just ensure API handles filtering by user_id.
+
+🟢 Fetch All Projects for an Artist
+javascript
+Copy
+Edit
+app.get('/api/user/projects', async (req, res) => {
+  const projects = await db.project.findMany({
+    where: { artist_id: req.user.id } // Only return projects for the logged-in artist
+  });
+  res.json(projects);
+});
+🟢 Fetch Project Details by ID
+javascript
+Copy
+Edit
+app.get('/api/projects/:id', async (req, res) => {
+  const project = await db.project.findUnique({
+    where: { id: req.params.id, artist_id: req.user.id } // Ensure only the project owner can access
+  });
+  res.json(project);
+});
+🟢 Fetch Milestones for a Specific Project
+javascript
+Copy
+Edit
+app.get('/api/projects/:id/milestones', async (req, res) => {
+  const milestones = await db.milestone.findMany({
+    where: { projectId: req.params.id }
+  });
+  res.json(milestones);
+});
+🟢 Submit Proof for a Specific Milestone
+javascript
+Copy
+Edit
+app.post('/api/milestones/:id/submit-proof', async (req, res) => {
+  const milestone = await db.milestone.update({
+    where: { id: req.params.id, project: { artist_id: req.user.id } }, // Ensure only project owner can update
+    data: { status: 'pending_approval' }
+  });
+  res.json({ message: 'Proof submitted' });
+});
+🟢 Check if a Project is Ready for Final Release
+javascript
+Copy
+Edit
+app.get('/api/projects/:id/finalize', async (req, res) => {
+  const milestones = await db.milestone.count({
+    where: { projectId: req.params.id, status: 'unlocked' }
+  });
+
+  const totalMilestones = await db.milestone.count({
+    where: { projectId: req.params.id }
+  });
+
+  res.json({ status: milestones === totalMilestones ? 'ready' : 'incomplete' });
+});
+🟥 Summary of Changes
+✅ Artist Dashboard now lists multiple projects
+✅ Sidebar dynamically updates for selected project
+✅ Each page (Overview, Milestones, Finalize Release) loads data per projectId
+✅ Backend APIs now filter projects & milestones per user
+

@@ -1,0 +1,169 @@
+Admin Project Creation Flow (/admin-dashboard/create-project)
+🔎 Purpose: Allow admins to create projects for artists, ensuring that each project has proper funding requirements, milestone structure, and metadata before being launched.
+
+📌 Tech Stack:
+✅ Frontend: Next.js + TailwindCSS
+✅ Backend: Node.js + Express.js + PostgreSQL
+✅ Auth: Placeholder for Privy (Future Implementation)
+✅ Blockchain: No on-chain integration yet, but structured for Base L2 with OnchainKit (Future Implementation)
+
+🟥 Admin Project Creation Flow Overview
+🔎 Purpose:
+✅ Allows admins to create new projects on behalf of artists
+✅ Ensures project funding, milestone structure, and metadata are set correctly
+✅ Prepares projects for milestone-based investment & revenue sharing
+
+📌 Steps in Project Creation
+1️⃣ Select an Artist
+2️⃣ Define Project Details
+3️⃣ Set Funding Goal
+4️⃣ Create Milestone Structure
+5️⃣ Submit Project for Approval
+
+🟥 1. Admin Dashboard – Create Project Page (/admin-dashboard/create-project)
+🔎 Purpose:
+✅ Form-based UI for entering project details
+✅ Ensures admin selects an artist before creating a project
+
+🟢 UI Components & Implementation
+tsx
+Copy
+Edit
+import { useState } from 'react';
+
+export default function CreateProject() {
+  const [artist, setArtist] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [fundingGoal, setFundingGoal] = useState('');
+  const [milestones, setMilestones] = useState([{ name: '', payout: '' }]);
+
+  const addMilestone = () => setMilestones([...milestones, { name: '', payout: '' }]);
+  const updateMilestone = (index, field, value) => {
+    const newMilestones = [...milestones];
+    newMilestones[index][field] = value;
+    setMilestones(newMilestones);
+  };
+
+  const handleSubmit = async () => {
+    const res = await fetch('/api/admin/projects', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ artist, title, description, fundingGoal, milestones }),
+    });
+    if (res.ok) alert('Project Created!');
+  };
+
+  return (
+    <div className="p-6 max-w-3xl mx-auto">
+      <h2 className="text-2xl font-bold">Create New Project</h2>
+      
+      <label className="block mt-4">Select Artist</label>
+      <input type="text" value={artist} onChange={(e) => setArtist(e.target.value)} className="border p-2 w-full" />
+
+      <label className="block mt-4">Project Title</label>
+      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="border p-2 w-full" />
+
+      <label className="block mt-4">Description</label>
+      <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="border p-2 w-full" />
+
+      <label className="block mt-4">Funding Goal ($)</label>
+      <input type="number" value={fundingGoal} onChange={(e) => setFundingGoal(e.target.value)} className="border p-2 w-full" />
+
+      <h3 className="text-xl font-semibold mt-6">Milestones</h3>
+      {milestones.map((milestone, index) => (
+        <div key={index} className="flex space-x-4 mt-2">
+          <input type="text" placeholder="Milestone Name" value={milestone.name} onChange={(e) => updateMilestone(index, 'name', e.target.value)} className="border p-2 w-2/3" />
+          <input type="number" placeholder="Payout ($)" value={milestone.payout} onChange={(e) => updateMilestone(index, 'payout', e.target.value)} className="border p-2 w-1/3" />
+        </div>
+      ))}
+      <button onClick={addMilestone} className="mt-4 bg-gray-500 text-white px-4 py-2">+ Add Milestone</button>
+
+      <button onClick={handleSubmit} className="mt-6 bg-red-500 text-white px-4 py-2 w-full">Create Project</button>
+    </div>
+  );
+}
+✅ Dynamically adds milestones
+✅ Collects all required project information
+✅ Sends API request to create the project
+
+🟢 API Implementation for Project Creation
+javascript
+Copy
+Edit
+app.post('/api/admin/projects', async (req, res) => {
+  const { artist, title, description, fundingGoal, milestones } = req.body;
+
+  // Ensure artist exists
+  const artistExists = await db.user.findUnique({ where: { username: artist } });
+  if (!artistExists) return res.status(400).json({ message: 'Artist not found' });
+
+  // Create project
+  const newProject = await db.project.create({
+    data: {
+      artist_id: artistExists.id,
+      title,
+      description,
+      funding_goal: parseFloat(fundingGoal),
+      amount_raised: 0,
+      status: 'funding',
+    },
+  });
+
+  // Create milestones
+  await Promise.all(
+    milestones.map(milestone =>
+      db.milestone.create({
+        data: {
+          project_id: newProject.id,
+          name: milestone.name,
+          payout_amount: parseFloat(milestone.payout),
+          status: 'locked',
+        },
+      })
+    )
+  );
+
+  res.json({ message: 'Project created successfully', projectId: newProject.id });
+});
+✅ Ensures artist exists
+✅ Creates project in projects table
+✅ Creates associated milestones
+
+🟢 Database Schema (Already Supports This)
+sql
+Copy
+Edit
+CREATE TABLE projects (
+  id SERIAL PRIMARY KEY,
+  artist_id INT REFERENCES users(id),
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  funding_goal DECIMAL(18,2) NOT NULL,
+  amount_raised DECIMAL(18,2) DEFAULT 0,
+  status VARCHAR(50) CHECK (status IN ('funding', 'in_progress', 'released')),
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE milestones (
+  id SERIAL PRIMARY KEY,
+  project_id INT REFERENCES projects(id),
+  name VARCHAR(255),
+  payout_amount DECIMAL(18,2),
+  status VARCHAR(50) CHECK (status IN ('locked', 'pending_approval', 'unlocked')),
+  created_at TIMESTAMP DEFAULT NOW()
+);
+✅ New projects & milestones will automatically be linked
+
+🟥 Summary of Admin Project Creation Flow
+Step	What Happens?	Main API Calls
+1️⃣ Select Artist	Admin chooses which artist owns the project	GET /users?role=artist
+2️⃣ Define Project Details	Admin enters title, description, funding goal	POST /admin/projects
+3️⃣ Set Funding Goal	Ensures min/max funding requirements	Handled in frontend
+4️⃣ Create Milestones	Defines payout milestones	Included in POST /admin/projects
+5️⃣ Submit for Approval	Project is stored in database & marked as funding	POST /admin/projects
+🚀 Next Steps
+✅ Implement Create Project button in Admin Dashboard
+✅ Ensure new projects appear in GET /admin/projects
+✅ Restrict project creation to admin users only
+✅ Test project milestone creation to prevent missing steps

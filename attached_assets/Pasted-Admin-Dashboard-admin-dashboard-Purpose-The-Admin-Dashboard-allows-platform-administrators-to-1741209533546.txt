@@ -1,0 +1,185 @@
+Admin Dashboard (/admin-dashboard)
+🔎 Purpose: The Admin Dashboard allows platform administrators to review artist projects, approve milestones, and distribute funds.
+
+📌 Tech Stack:
+✅ Frontend: Next.js + TailwindCSS
+✅ Backend: Node.js + Express.js + PostgreSQL
+✅ Auth: Placeholder for Privy (Future Implementation)
+✅ Blockchain: No on-chain integration yet, but structured for Base L2 with OnchainKit (Future Implementation)
+
+🟥 Admin Dashboard Overview (/admin-dashboard)
+🔎 Purpose:
+✅ Lists all active artist projects
+✅ Allows admins to select a project for review
+✅ Provides an overview of platform-wide statistics
+
+🛠️ What It Should Show
+Admin Welcome Message: "Welcome back, Admin!"
+Platform Statistics Panel
+Total Active Projects
+Total Milestone Approvals Pending
+Total Funds Distributed
+Project List (Selectable)
+Each project card includes:
+🎵 Project Name
+👤 Artist Name
+📊 Funding Status ($X of $Y Raised)
+🏷️ Status (Funding, In Progress, Ready for Release)
+🔗 [Manage] Button (Takes user to /admin-dashboard/[projectId])
+🛠️ API Calls
+GET /admin/projects → Fetch all active projects.
+GET /admin/stats → Fetch platform-wide statistics.
+🟥 Project-Specific Admin Dashboard (/admin-dashboard/[projectId])
+When an admin selects a project, they should see project-specific details and be able to manage milestones & fund distribution.
+
+🛠️ Sidebar Navigation (Dynamically Generated)
+tsx
+Copy
+Edit
+import Link from 'next/link';
+
+export default function AdminSidebar({ projectId }) {
+  return (
+    <nav className="w-64 bg-black h-screen flex flex-col p-4">
+      <h2 className="text-white text-lg font-bold mb-6">Admin Dashboard</h2>
+      <Link href={`/admin-dashboard/${projectId}`}>
+        <button className="bg-red-500 text-white px-4 py-2 w-full text-left">Project Overview</button>
+      </Link>
+      <Link href={`/admin-dashboard/${projectId}/milestones`}>
+        <button className="text-gray-300 hover:text-white px-4 py-2 w-full text-left">Milestones</button>
+      </Link>
+      <Link href={`/admin-dashboard/${projectId}/fund-distribution`}>
+        <button className="text-gray-300 hover:text-white px-4 py-2 w-full text-left">Fund Distribution</button>
+      </Link>
+    </nav>
+  );
+}
+✅ Sidebar now updates links dynamically based on projectId
+
+🟥 1. Project Overview (/admin-dashboard/[projectId])
+🔎 Purpose:
+✅ Shows full details of the selected artist’s project
+✅ Provides insights into funding progress & milestones
+
+🛠️ What It Should Show
+Project Title & Artist Name
+Funding Progress (Raised: $X of $Y)
+Status of Current Milestones
+Admin Actions
+🔄 Refresh Data
+✅ View Milestone Submissions
+💰 Release Funds
+🛠️ API Calls
+GET /admin/projects/{projectId} → Fetch project details.
+GET /admin/projects/{projectId}/milestones → Fetch milestone statuses.
+🟥 2. Milestone Review & Approvals (/admin-dashboard/[projectId]/milestones)
+🔎 Purpose:
+✅ Lists all milestones for the selected project
+✅ Allows admins to approve milestone proof submissions
+✅ Updates the milestone status (Pending Approval → Approved)
+
+🛠️ What It Should Show
+Milestone List
+✅ Milestone 1: Pre-Production (Approved)
+⏳ Milestone 2: Recording (Pending Approval)
+❌ Milestone 3: Mixing & Mastering (Locked)
+❌ Milestone 4: Final Release (Locked)
+Review Section
+View Submitted Proof
+✅ [Approve Milestone]
+❌ [Reject Milestone] (Requires rejection reason)
+🛠️ API Calls
+GET /admin/projects/{projectId}/milestones → Fetch milestones.
+POST /admin/milestones/{milestoneId}/approve → Approve milestone.
+POST /admin/milestones/{milestoneId}/reject → Reject milestone.
+🟥 3. Fund Distribution (/admin-dashboard/[projectId]/fund-distribution)
+🔎 Purpose:
+✅ Allows admins to release funds to artists
+✅ Ensures all milestones are completed before funds are distributed
+
+🛠️ What It Should Show
+Fund Balance for Project
+Milestone Payout Status
+✅ Milestone 1: $X released
+✅ Milestone 2: $X released
+⏳ Milestone 3: $X pending approval
+Admin Action: [Release Funds]
+If milestones are complete → Enable fund release button
+If not → Disable and show “Milestones must be completed first”
+🛠️ API Calls
+GET /admin/projects/{projectId}/funds → Fetch available funds.
+POST /admin/projects/{projectId}/release-funds → Approve final fund release.
+🛠️ Backend API Implementation for Admin Dashboard
+✅ Ensures only authenticated admins can access APIs
+✅ Filters projects by artist_id & projectId for granular control
+
+1️⃣ Fetch All Active Projects
+javascript
+Copy
+Edit
+app.get('/api/admin/projects', async (req, res) => {
+  const projects = await db.project.findMany({
+    where: { status: { not: 'released' } } // Only show active projects
+  });
+  res.json(projects);
+});
+2️⃣ Fetch Specific Project Details
+javascript
+Copy
+Edit
+app.get('/api/admin/projects/:id', async (req, res) => {
+  const project = await db.project.findUnique({
+    where: { id: req.params.id }
+  });
+  res.json(project);
+});
+3️⃣ Fetch Project Milestones
+javascript
+Copy
+Edit
+app.get('/api/admin/projects/:id/milestones', async (req, res) => {
+  const milestones = await db.milestone.findMany({
+    where: { projectId: req.params.id }
+  });
+  res.json(milestones);
+});
+4️⃣ Approve Milestone
+javascript
+Copy
+Edit
+app.post('/api/admin/milestones/:id/approve', async (req, res) => {
+  await db.milestone.update({
+    where: { id: req.params.id },
+    data: { status: 'unlocked' }
+  });
+  res.json({ message: 'Milestone approved' });
+});
+5️⃣ Release Funds
+javascript
+Copy
+Edit
+app.post('/api/admin/projects/:id/release-funds', async (req, res) => {
+  const project = await db.project.findUnique({
+    where: { id: req.params.id }
+  });
+
+  const milestones = await db.milestone.count({
+    where: { projectId: req.params.id, status: 'unlocked' }
+  });
+
+  const totalMilestones = await db.milestone.count({
+    where: { projectId: req.params.id }
+  });
+
+  if (milestones !== totalMilestones) {
+    return res.status(400).json({ message: 'All milestones must be completed first' });
+  }
+
+  // Logic to release funds
+  res.json({ message: 'Funds released to artist' });
+});
+🟥 Summary of Admin Dashboard
+Page	Purpose	Main API Calls
+Project Overview	Shows project funding, progress, & status	GET /admin/projects/{projectId}
+Milestones	Review & approve artist submissions	GET /admin/projects/{projectId}/milestones, POST /admin/milestones/{id}/approve
+Fund Distribution	Allows final fund release	GET /admin/projects/{projectId}/funds, POST /admin/projects/{projectId}/release-funds
