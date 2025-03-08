@@ -56,7 +56,7 @@ export function StatsGraph({ title, value, timestamp }: StatsGraphProps) {
           <Button 
             variant={timeFilter === '1m' ? 'secondary' : 'ghost'} 
             size="sm" 
-            className="h-7 text-xs text-white/60 hover:text-white"
+            className={`h-7 text-xs ${timeFilter === '1m' ? 'text-black' : 'text-white/60'} hover:text-black`}
             onClick={() => setTimeFilter('1m')}
           >
             1m
@@ -64,7 +64,7 @@ export function StatsGraph({ title, value, timestamp }: StatsGraphProps) {
           <Button 
             variant={timeFilter === '1y' ? 'secondary' : 'ghost'} 
             size="sm" 
-            className="h-7 text-xs text-white/60 hover:text-white"
+            className={`h-7 text-xs ${timeFilter === '1y' ? 'text-black' : 'text-white/60'} hover:text-black`}
             onClick={() => setTimeFilter('1y')}
           >
             1y
@@ -72,7 +72,7 @@ export function StatsGraph({ title, value, timestamp }: StatsGraphProps) {
           <Button 
             variant={timeFilter === 'All' ? 'secondary' : 'ghost'} 
             size="sm" 
-            className="h-7 text-xs text-white/60 hover:text-white"
+            className={`h-7 text-xs ${timeFilter === 'All' ? 'text-black' : 'text-white/60'} hover:text-black`}
             onClick={() => setTimeFilter('All')}
           >
             All
