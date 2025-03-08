@@ -9,6 +9,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import { ExternalLink } from "lucide-react";
 
 // For demo purposes, we'll use a mock session
 const mockSession = {
@@ -17,14 +26,13 @@ const mockSession = {
     name: "Demo User",
     email: "demo@example.com",
     avatar: "/images/avatar.jpg",
-    isArtist: true, // Added isArtist flag for demo
-    isAdmin: true // Added isAdmin flag for demo
+    isArtist: true,
+    isAdmin: true
   }
 };
 
 export function Header() {
   const [location] = useLocation();
-
   const isLoggedIn = mockSession.isLoggedIn;
   const isArtist = mockSession.user.isArtist;
   const isAdmin = mockSession.user.isAdmin;
@@ -41,32 +49,109 @@ export function Header() {
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-4">
-            <Link href="/">
-              <span className={`text-sm ${location === "/" ? "text-white" : "text-white/60"} hover:text-white transition-colors`}>
-                Home
-              </span>
-            </Link>
-            <Link href="/dashboard">
-              <span className={`text-sm ${location === "/dashboard" ? "text-white" : "text-white/60"} hover:text-white transition-colors`}>
-                Fans
-              </span>
-            </Link>
-            {isArtist && (
-              <Link href="/artist-dashboard">
-                <span className={`text-sm ${location === "/artist-dashboard" ? "text-white" : "text-white/60"} hover:text-white transition-colors`}>
-                  Artists
-                </span>
-              </Link>
-            )}
-            {isAdmin && (
-              <Link href="/admin-dashboard">
-                <span className={`text-sm ${location === "/admin-dashboard" ? "text-white" : "text-white/60"} hover:text-white transition-colors`}>
-                  Admin
-                </span>
-              </Link>
-            )}
-          </nav>
+          <NavigationMenu className="hidden md:flex">
+            <NavigationMenuList>
+              {/* Product Category */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-white/60 hover:text-white">
+                  Product
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4">
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link href="/dashboard">
+                          <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/5">
+                            <div className="text-sm font-medium leading-none text-white">For Fans</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-white/60">
+                              Invest in your favorite artists and earn from their success
+                            </p>
+                          </a>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    {isArtist && (
+                      <li>
+                        <NavigationMenuLink asChild>
+                          <Link href="/artist-dashboard">
+                            <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/5">
+                              <div className="text-sm font-medium leading-none text-white">For Artists</div>
+                              <p className="line-clamp-2 text-sm leading-snug text-white/60">
+                                Raise funds and manage your music projects
+                              </p>
+                            </a>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    )}
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link href="/about">
+                          <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/5">
+                            <div className="text-sm font-medium leading-none text-white">About</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-white/60">
+                              Learn about our artist-centric platform
+                            </p>
+                          </a>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              {/* Resources Category */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-white/60 hover:text-white">
+                  Resources
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4">
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <a
+                          href="https://docs.originalworks.xyz"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/5"
+                        >
+                          <div className="text-sm font-medium leading-none text-white inline-flex items-center gap-2">
+                            Original Works
+                            <ExternalLink className="h-3 w-3" />
+                          </div>
+                          <p className="line-clamp-2 text-sm leading-snug text-white/60">
+                            Learn about the protocol powering our platform
+                          </p>
+                        </a>
+                      </NavigationMenuLink>
+                    </li>
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link href="/about#faq">
+                          <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/5">
+                            <div className="text-sm font-medium leading-none text-white">FAQ</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-white/60">
+                              Common questions about our platform
+                            </p>
+                          </a>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              {isAdmin && (
+                <NavigationMenuItem>
+                  <Link href="/admin-dashboard">
+                    <span className={`text-sm ${location === "/admin-dashboard" ? "text-white" : "text-white/60"} hover:text-white transition-colors cursor-pointer px-4 py-2`}>
+                      Admin
+                    </span>
+                  </Link>
+                </NavigationMenuItem>
+              )}
+            </NavigationMenuList>
+          </NavigationMenu>
 
           {/* Action Buttons / Profile */}
           <div className="flex items-center space-x-4">
@@ -99,11 +184,11 @@ export function Header() {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href="/dashboard">Fans</Link>
+                    <Link href="/dashboard">For Fans</Link>
                   </DropdownMenuItem>
                   {isArtist && (
                     <DropdownMenuItem asChild>
-                      <Link href="/artist-dashboard">Artists</Link>
+                      <Link href="/artist-dashboard">For Artists</Link>
                     </DropdownMenuItem>
                   )}
                   {isAdmin && (

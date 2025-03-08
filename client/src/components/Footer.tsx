@@ -14,9 +14,9 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Platform Links */}
+          {/* Product Links */}
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-white">Platform</h4>
+            <h4 className="text-sm font-semibold text-white">Product</h4>
             <ul className="space-y-2">
               <li>
                 <Link href="/about">
@@ -28,14 +28,14 @@ export function Footer() {
               <li>
                 <Link href="/dashboard">
                   <span className="text-sm text-white/60 hover:text-white transition-colors cursor-pointer">
-                    Fans
+                    For Fans
                   </span>
                 </Link>
               </li>
               <li>
                 <Link href="/artist-dashboard">
                   <span className="text-sm text-white/60 hover:text-white transition-colors cursor-pointer">
-                    Artists
+                    For Artists
                   </span>
                 </Link>
               </li>
@@ -54,11 +54,6 @@ export function Footer() {
                   className="text-sm text-white/60 hover:text-white transition-colors inline-flex items-center gap-1"
                 >
                   Original Works <ExternalLink className="h-3 w-3" />
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">
-                  API Reference
                 </a>
               </li>
               <li>
