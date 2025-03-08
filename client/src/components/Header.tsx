@@ -45,7 +45,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/">
             <div className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-b from-blue-100 via-white to-white/50 tracking-tight">
-              Hyperspace
+              Superfan One
             </div>
           </Link>
 
@@ -214,7 +214,7 @@ export function Header() {
             {!isLoggedIn ? (
               <Button
                 variant="default"
-                className="bg-[#8B0000] hover:bg-[#A00000] text-white"
+                className="bg-[#4B0082] hover:bg-[#380062] text-white"
                 asChild
               >
                 <Link href="/#releases">Start Investing</Link>

@@ -34,13 +34,13 @@ export default function Home() {
                 MUSIC OWNERSHIP
               </h1>
               <p className="text-sm sm:text-base md:text-lg text-white/60 max-w-3xl mx-auto leading-relaxed">
-                The Label That Works for You, Not Against You—Where Artists Keep 100% of Their Rights, Royalties, and Control.
+                Superfan One lets artists circumvent traditional record label contracts to fund their music, control their rights, and keep 100% of what they earn.
               </p>
             </div>
 
             <div>
               <Link href="/releases/srs">
-                <a className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base md:text-lg font-medium text-white bg-[#8B0000] rounded-full hover:bg-[#8B0000]/90 transition-colors">
+                <a className="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base md:text-lg font-medium text-white bg-[#4B0082] hover:bg-[#380062] transition-colors rounded-full">
                   View Latest Release
                 </a>
               </Link>

@@ -85,8 +85,8 @@ export function StatsGraph({ title, value, timestamp }: StatsGraphProps) {
           <AreaChart data={getActiveData()}>
             <defs>
               <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#6366F1" stopOpacity={0.5} />
-                <stop offset="100%" stopColor="#6366F1" stopOpacity={0} />
+                <stop offset="0%" stopColor="#4B0082" stopOpacity={0.5} />
+                <stop offset="100%" stopColor="#4B0082" stopOpacity={0} />
               </linearGradient>
             </defs>
             <XAxis 
@@ -99,7 +99,7 @@ export function StatsGraph({ title, value, timestamp }: StatsGraphProps) {
             <Area
               type="monotone"
               dataKey="value"
-              stroke="#6366F1"
+              stroke="#4B0082"
               fill="url(#colorGradient)"
               strokeWidth={2}
             />
