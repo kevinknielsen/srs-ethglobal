@@ -40,7 +40,7 @@ export default function About() {
             {/* Original Works Protocol Diagram */}
             <div className="relative rounded-xl overflow-hidden border border-white/10">
               <img 
-                src="/assets/image_1741393063191.png" 
+                src="/images/protocol-diagram.png" 
                 alt="Original Works Protocol Diagram" 
                 className="w-full"
               />
