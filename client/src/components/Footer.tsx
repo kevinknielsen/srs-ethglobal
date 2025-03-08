@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { ExternalLink } from "lucide-react";
 
 export function Footer() {
   return (
@@ -46,8 +47,13 @@ export function Footer() {
             <h4 className="text-sm font-semibold text-white">Resources</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">
-                  Documentation
+                <a 
+                  href="https://docs.originalworks.xyz" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm text-white/60 hover:text-white transition-colors inline-flex items-center gap-1"
+                >
+                  Original Works <ExternalLink className="h-3 w-3" />
                 </a>
               </li>
               <li>

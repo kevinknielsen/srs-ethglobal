@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Header } from "@/components/Header";
+import { Button } from "@/components/ui/button";
+import { ExternalLink } from "lucide-react";
 
 export default function About() {
   return (
@@ -19,11 +21,40 @@ export default function About() {
             </h1>
             <div className="prose prose-invert mx-auto">
               <p className="text-lg text-white/70 leading-relaxed">
-                The convergence of decentralized finance (DeFi) and tokenized royalty streams (RTs) presents a paradigm shift in music industry financing. Built on the Original Works protocol, our platform ensures that artists retain complete control over their music rights forever.
+                The convergence of decentralized finance (DeFi) and tokenized royalty streams (RTs) presents a paradigm shift in music industry financing. Built on the{' '}
+                <a 
+                  href="https://docs.originalworks.xyz" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[#8B0000] hover:text-[#A00000] inline-flex items-center gap-1"
+                >
+                  Original Works protocol <ExternalLink className="h-4 w-4" />
+                </a>
+                , our platform ensures that artists retain complete control over their music rights forever.
               </p>
               <p className="text-lg text-white/70 leading-relaxed">
                 By transforming royalties into liquid assets, artists can access upfront capital, establish revolving credit lines tied to real-time earnings, and engage fans as direct stakeholders in their success.
               </p>
+            </div>
+
+            {/* Original Works Protocol Diagram */}
+            <div className="relative rounded-xl overflow-hidden border border-white/10">
+              <img 
+                src="/assets/image_1741393063191.png" 
+                alt="Original Works Protocol Diagram" 
+                className="w-full"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <div className="absolute bottom-4 left-4">
+                <Button 
+                  variant="default"
+                  className="bg-[#8B0000] hover:bg-[#A00000] text-white"
+                  onClick={() => window.open('https://docs.originalworks.xyz', '_blank')}
+                >
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Learn More About Original Works
+                </Button>
+              </div>
             </div>
           </div>
 
