@@ -12,7 +12,7 @@ export default function Home() {
       <motion.main 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative container mx-auto px-4 py-16"
+        className="relative container mx-auto px-4 py-16 mt-16"
       >
         <div className="absolute inset-0 z-0">
           <div 
@@ -28,10 +28,10 @@ export default function Home() {
         <div className="relative z-10 max-w-4xl mx-auto">
           <section className="text-center space-y-8">
             <div className="space-y-6">
-              <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/50 font-western tracking-wide">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/50 font-western tracking-wide">
                 Superfan One
               </h1>
-              <p className="text-lg text-white/60 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg text-white/60 max-w-3xl mx-auto leading-relaxed px-4">
                 The Label That Works for You, Not Against You—Where Artists Keep 100% of Their Rights, Royalties, and Control.
               </p>
             </div>

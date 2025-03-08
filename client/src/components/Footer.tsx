@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="bg-black border-t border-white/10">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
           {/* Brand Section */}
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-white">Superfan One</h3>
@@ -57,7 +57,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <Link href="/about">
+                <Link href="/about#faq">
                   <span className="text-sm text-white/60 hover:text-white transition-colors cursor-pointer">
                     FAQ
                   </span>

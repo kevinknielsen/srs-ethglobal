@@ -17,7 +17,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Menu } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 // For demo purposes, we'll use a mock session
 const mockSession = {
@@ -48,8 +49,8 @@ export function Header() {
             </div>
           </Link>
 
-          {/* Navigation */}
-          <NavigationMenu className="flex">
+          {/* Desktop Navigation */}
+          <NavigationMenu className="hidden md:flex">
             <NavigationMenuList className="flex gap-6">
               {/* Product Category */}
               <NavigationMenuItem>
@@ -150,8 +151,66 @@ export function Header() {
           {/* Push profile menu to the right */}
           <div className="flex-1" />
 
+          {/* Mobile Menu Button */}
+          <Sheet>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon" className="text-white">
+                <Menu className="h-6 w-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-80 bg-black/95 border-white/10 p-0">
+              <nav className="flex flex-col h-full">
+                <div className="p-4 border-b border-white/10">
+                  <h2 className="text-lg font-semibold text-white">Menu</h2>
+                </div>
+                <div className="flex-1 overflow-auto py-4">
+                  <div className="px-4 py-2">
+                    <h3 className="text-sm font-medium text-white mb-2">Product</h3>
+                    <div className="space-y-2">
+                      <Link href="/dashboard">
+                        <a className="block p-2 text-white/60 hover:text-white">For Fans</a>
+                      </Link>
+                      {isArtist && (
+                        <Link href="/artist-dashboard">
+                          <a className="block p-2 text-white/60 hover:text-white">For Artists</a>
+                        </Link>
+                      )}
+                      <Link href="/about">
+                        <a className="block p-2 text-white/60 hover:text-white">About</a>
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="px-4 py-2">
+                    <h3 className="text-sm font-medium text-white mb-2">Resources</h3>
+                    <div className="space-y-2">
+                      <a
+                        href="https://docs.originalworks.xyz"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block p-2 text-white/60 hover:text-white"
+                      >
+                        Original Works
+                        <ExternalLink className="inline-block ml-2 h-3 w-3" />
+                      </a>
+                      <Link href="/about#faq">
+                        <a className="block p-2 text-white/60 hover:text-white">FAQ</a>
+                      </Link>
+                    </div>
+                  </div>
+                  {isAdmin && (
+                    <div className="px-4 py-2">
+                      <Link href="/admin-dashboard">
+                        <a className="block p-2 text-white/60 hover:text-white">Admin</a>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </nav>
+            </SheetContent>
+          </Sheet>
+
           {/* Action Buttons / Profile */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center">
             {!isLoggedIn ? (
               <Button
                 variant="default"
