@@ -3,7 +3,7 @@ import { ExternalLink } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-black border-t border-white/10">
+    <footer className="bg-black border-t border-white/10 overflow-hidden">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
           {/* Brand Section */}

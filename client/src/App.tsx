@@ -43,7 +43,7 @@ function Router() {
 function App() {
   return (
     <Providers>
-      <div className="min-h-screen bg-black text-white flex flex-col">
+      <div className="min-h-screen bg-black text-white flex flex-col overflow-x-hidden">
         <Header />
         {/* Add pt-16 to account for fixed header height */}
         <div className="pt-16 flex-grow">
