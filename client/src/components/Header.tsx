@@ -44,8 +44,8 @@ export function Header() {
         <div className="flex h-16 items-center gap-8">
           {/* Logo */}
           <Link href="/">
-            <div className="text-xl font-bold text-white cursor-pointer">
-              Superfan One
+            <div className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-b from-blue-100 via-white to-white/50 tracking-tight">
+              Hyperspace
             </div>
           </Link>
 

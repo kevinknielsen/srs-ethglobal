@@ -28,8 +28,10 @@ export default function Home() {
         <div className="relative z-10 max-w-4xl mx-auto">
           <section className="text-center space-y-4 sm:space-y-8">
             <div className="space-y-3 sm:space-y-6">
-              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/50 font-western tracking-wide">
-                Superfan One
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-blue-100 via-white to-white/50">
+                REVOLUTIONIZING
+                <br />
+                MUSIC OWNERSHIP
               </h1>
               <p className="text-sm sm:text-base md:text-lg text-white/60 max-w-3xl mx-auto leading-relaxed">
                 The Label That Works for You, Not Against You—Where Artists Keep 100% of Their Rights, Royalties, and Control.
