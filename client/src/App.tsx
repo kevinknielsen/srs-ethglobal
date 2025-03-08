@@ -1,6 +1,8 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import Home from "@/pages/Home";
+import About from "@/pages/about";
 import SteelRiverSaintsRelease from "@/pages/releases/srs";
 import Dashboard from "@/pages/Dashboard";
 import ArtistDashboard from "@/pages/artist-dashboard";
@@ -21,6 +23,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/about" component={About} />
       <Route path="/releases/srs" component={SteelRiverSaintsRelease} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/artist-dashboard" component={ArtistDashboard} />
@@ -40,12 +43,13 @@ function Router() {
 function App() {
   return (
     <Providers>
-      <div className="min-h-screen bg-black text-white">
+      <div className="min-h-screen bg-black text-white flex flex-col">
         <Header />
         {/* Add pt-16 to account for fixed header height */}
-        <div className="pt-16">
+        <div className="pt-16 flex-grow">
           <Router />
         </div>
+        <Footer />
         <Toaster />
       </div>
     </Providers>
